@@ -2,7 +2,7 @@
 
 export enum RoutePath {
   Catalog = '/',
-  Product = '/camera/:id',
+  Product = '/cameras/:id',
   NOT_FOUND = '/*',
   Basket = '/basket',
 }

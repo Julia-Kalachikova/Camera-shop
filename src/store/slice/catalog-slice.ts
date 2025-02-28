@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ProductCardType } from '../../../types';
-import { FeatureModule } from '../../../const';
-import { fetchCardsAction } from '../../api-actions';
+import { FeatureModule } from '../../const';
+import { getCardsAction } from '../api-actions';
+import { ProductCardType } from '../../types';
 
 export type CardsSliceType = {
   cards: ProductCardType[];
@@ -19,14 +19,14 @@ export const cardsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCardsAction.pending, (state) => {
+      .addCase(getCardsAction.pending, (state) => {
         state.isLoadingCards = true;
       })
-      .addCase(fetchCardsAction.fulfilled, (state, { payload }: PayloadAction<ProductCardType[]>) => {
+      .addCase(getCardsAction.fulfilled, (state, { payload }: PayloadAction<ProductCardType[]>) => {
         state.cards = payload;
         state.isLoadingCards = false;
       })
-      .addCase(fetchCardsAction.rejected, (state) => {
+      .addCase(getCardsAction.rejected, (state) => {
         state.isLoadingCards = false;
       });
   }

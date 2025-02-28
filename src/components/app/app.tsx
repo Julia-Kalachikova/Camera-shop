@@ -5,26 +5,22 @@ import ProductPage from '../../pages/product-page/product-page';
 import BasketPage from '../../pages/basket-page/basket-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
-import { getIsLoadingCards } from '../../store/selectors';
+import { selectIsLoadingCards } from '../../store/selectors';
 import { useEffect } from 'react';
-import { fetchCardsAction } from '../../store/api-actions';
-// import { ProductCardType } from '../../types';
-
-// type Props = {
-//   productCards: ProductCardType[];
-// }
+import { getCardsAction } from '../../store/api-actions';
+import Spinner from '../spinner/spinner';
 
 export default function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  // const isLoading = useAppSelector(getIsLoadingCards);
+  const isLoading = useAppSelector(selectIsLoadingCards);
 
   useEffect(() => {
-    dispatch(fetchCardsAction());
+    dispatch(getCardsAction());
   }, [dispatch]);
 
-  // if(isLoading) {
-  //   return <Spinner/>;
-  // }
+  if(isLoading) {
+    return <Spinner/>;
+  }
   return (
     <Routes>
       <Route

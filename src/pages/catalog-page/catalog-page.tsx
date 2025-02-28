@@ -1,18 +1,14 @@
 import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { ProductCardType } from '../../types';
 import ProductCardList from '../../components/product-card-list/product-card-list';
 import { useAppSelector } from '../../store/store-hooks';
-import { getCards } from '../../store/selectors';
+import { selectCards } from '../../store/selectors';
 
-// type Props = {
-//   productCards: ProductCardType[];
-// }
 
 export default function CatalogPage(): JSX.Element {
 
-  const productCards = useAppSelector(getCards);
+  const productCards = useAppSelector(selectCards);
 
   return (
     <div className="wrapper">

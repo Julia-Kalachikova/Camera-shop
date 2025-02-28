@@ -7,16 +7,30 @@ import { StateType } from './store-types';
 import { store } from './index-store';
 
 
-export const fetchCardsAction = createAsyncThunk<ProductCardType[],
+export const getCardsAction = createAsyncThunk<ProductCardType[],
 undefined,
 {
   dispatch: typeof store.dispatch;
   state: StateType;
   extra: AxiosInstance;
 }>(
-  'cards/get',
+  'cards/getCard',
   async (_arg, {extra: api}) => {
     const response = await api.get<ProductCardType[]>(APIRoutes.Cards);
+    return response?.data;
+  }
+);
+
+export const getProductDetailsByID = createAsyncThunk<ProductCardType[],
+{cardId: string},
+{
+  dispatch: typeof store.dispatch;
+  state: StateType;
+  extra: AxiosInstance;
+}
+>('product/getProduct',
+  async ({cardId}, {extra: api}) => {
+    const response = await api.get<ProductCardType>(`${APIRoutes.Cards}/${cardId}`);
     return response?.data;
   }
 );
