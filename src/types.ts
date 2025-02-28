@@ -16,3 +16,4 @@ export type ProductCardType = {
   previewImgWebp: string;
   previewImgWebp2x: string;
 };
+

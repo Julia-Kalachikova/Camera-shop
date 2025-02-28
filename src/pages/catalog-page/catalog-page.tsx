@@ -3,12 +3,17 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { ProductCardType } from '../../types';
 import ProductCardList from '../../components/product-card-list/product-card-list';
+import { useAppSelector } from '../../store/store-hooks';
+import { getCards } from '../../store/selectors';
 
-type Props = {
-  productCards: ProductCardType[];
-}
+// type Props = {
+//   productCards: ProductCardType[];
+// }
 
-export default function CatalogPage({productCards}: Props): JSX.Element {
+export default function CatalogPage(): JSX.Element {
+
+  const productCards = useAppSelector(getCards);
+
   return (
     <div className="wrapper">
       <Header />
