@@ -21,7 +21,7 @@ undefined,
   }
 );
 
-export const getProductDetailsByID = createAsyncThunk<ProductCardType[],
+export const getProductDetailsByID = createAsyncThunk<ProductCardType,
 {cardId: string},
 {
   dispatch: typeof store.dispatch;

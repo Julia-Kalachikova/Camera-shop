@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ProductCardType } from '../../types';
 import Stars from '../stars/stars';
-import { RoutePath } from '../../const';
 
 type Props = {
   card: ProductCardType;
@@ -9,7 +8,7 @@ type Props = {
 
 export default function ProductCard({ card }: Props): JSX.Element {
   const { name, type, category, description, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, price, rating, reviewCount } = card;
-
+  const linkTo = `/cameras/${card.id}`;
   return (
     <div className='product-card'>
       <div className='product-card__img'>
@@ -21,8 +20,8 @@ export default function ProductCard({ card }: Props): JSX.Element {
           <img
             src={previewImg}
             srcSet={previewImg2x}
-            width='280'
-            height='240'
+            width={280}
+            height={240}
             alt={description}
           />
         </picture>
@@ -42,7 +41,7 @@ export default function ProductCard({ card }: Props): JSX.Element {
       <div className='product-card__buttons'>
         <button className='btn btn--purple product-card__btn' type='button'>Купить
         </button>
-        <Link className='btn btn--transparent' to={RoutePath.Product.replace(':id', card.id)}>Подробнее
+        <Link className='btn btn--transparent' to={linkTo}>Подробнее
         </Link>
       </div>
     </div>

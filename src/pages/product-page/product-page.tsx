@@ -24,6 +24,7 @@ export default function ProductPage(): JSX.Element {
   if (!productDetails) {
     return <div>Товар не найден</div>;
   }
+  const { name, type, category, description, vendorCode, level, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, price, rating, reviewCount } = productDetails;
 
   return (
     <div className="wrapper">
@@ -47,7 +48,7 @@ export default function ProductPage(): JSX.Element {
                     </svg>
                   </Link>
                 </li>
-                <li className="breadcrumbs__item"><span className="breadcrumbs__link breadcrumbs__link--active">{productDetails?.name}</span>
+                <li className="breadcrumbs__item"><span className="breadcrumbs__link breadcrumbs__link--active">{name}</span>
                 </li>
               </ul>
             </div>
@@ -57,23 +58,27 @@ export default function ProductPage(): JSX.Element {
               <div className="container">
                 <div className="product__img">
                   <picture>
-                    <source type="image/webp"
-                      srcSet={`${productDetails?.previewImgWebp}, ${productDetails?.previewImgWebp2x}`}
+                    <source
+                      type='imge/webp'
+                      srcSet={`../${previewImgWebp}, ../${previewImgWebp2x} 2x`}
                     />
                     <img
-                      src={productDetails?.previewImg}
-                      srcSet={`${productDetails?.previewImg2x} 2х`} width="560" height="480" alt={productDetails?.name}
+                      src={`../${previewImg}`}
+                      srcSet={`../${previewImg2x} 2x`}
+                      width={560}
+                      height={480}
+                      alt={name}
                     />
                   </picture>
                 </div>
                 <div className="product__content">
-                  <h1 className="title title--h3">«{productDetails?.name}»</h1>
+                  <h1 className="title title--h3">«{name}»</h1>
                   <div className="rate product__rate">
                     <Stars rating={productDetails.rating} />
-                    <p className="visually-hidden">Рейтинг: {productDetails?.rating}</p>
-                    <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{productDetails?.reviewCount}</p>
+                    <p className="visually-hidden">Рейтинг: {rating}</p>
+                    <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
                   </div>
-                  <p className="product__price"><span className="visually-hidden">Цена:</span>{productDetails?.price.toLocaleString('ru-RU')} ₽</p>
+                  <p className="product__price"><span className="visually-hidden">Цена:</span>{price.toLocaleString('ru-RU')} ₽</p>
                   <button className="btn btn--purple" type="button">
                     <svg width="24" height="16" aria-hidden="true">
                       <use xlinkHref="#icon-add-basket"></use>
@@ -99,14 +104,14 @@ export default function ProductPage(): JSX.Element {
                     <div className="tabs__content">
                       <div className={`tabs__element ${activeTab === 'specs' ? 'is-active' : ''}`}>
                         <Specs
-                          vendorCode={productDetails.vendorCode}
-                          category={productDetails.category}
-                          type={productDetails.type}
-                          level={productDetails?.level}
+                          vendorCode={vendorCode}
+                          category={category}
+                          type={type}
+                          level={level}
                         />
                       </div>
                       <div className={`tabs__element ${activeTab === 'description' ? 'is-active' : ''}`}>
-                        <Description description={productDetails.description} name={productDetails.name} />
+                        <Description description={description} name={name} />
                       </div>
                     </div>
                   </div>
