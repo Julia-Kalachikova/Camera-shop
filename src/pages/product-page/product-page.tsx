@@ -19,6 +19,7 @@ export default function ProductPage(): JSX.Element {
   const productDetails = useAppSelector(selectProductDetails);
   const isLoadingProduct = useAppSelector(selectProductLoadingDetails);
   const reviews = useAppSelector(selectProductReviews);
+
   useEffect(() => {
     if (cardId) {
       dispatch(getProductDetailsByID({ cardId }));
