@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
 import { APIRoutes } from '../const';
-import { ProductCardType } from '../types';
+import { ProductCardType, ReviewType } from '../types';
 import { StateType } from './store-types';
 import { store } from './index-store';
 
@@ -34,3 +34,19 @@ export const getProductDetailsByID = createAsyncThunk<ProductCardType,
     return response?.data;
   }
 );
+
+export const getProductReviews = createAsyncThunk<
+ ReviewType[],
+  { cardId: string },
+  {
+    dispatch: typeof store.dispatch;
+    state: StateType;
+    extra: AxiosInstance;
+  }
+>('product/getProductReviews',
+  async ({cardId}, { extra: api }) => {
+    const response = await api.get<ReviewType[]>(`${APIRoutes.Cards}/${cardId}/reviews`);
+    return response?.data;
+  }
+);
+

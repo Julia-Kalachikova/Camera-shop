@@ -23,4 +23,5 @@ export const FeatureModule = {
 
 export enum APIRoutes {
   Cards = '/cameras',
+
 }

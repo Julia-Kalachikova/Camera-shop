@@ -8,3 +8,8 @@ export const selectIsLoadingCards = (state: StateType) => state[FeatureModule.CA
 export const selectProductDetails = (state: StateType) => state[FeatureModule.PRODUCT].productDetails;
 
 export const selectProductLoadingDetails = (state: StateType) => state[FeatureModule.PRODUCT].productLoadingDetails;
+
+export const selectProductReviews = (state: StateType) => state[FeatureModule.PRODUCT].productReviews;
+
+export const selectProductLoadingReviews = (state: StateType) => state[FeatureModule.PRODUCT].productLoadingReviews;
+
