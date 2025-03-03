@@ -8,7 +8,7 @@ type Props = {
 
 export default function ProductCard({ card }: Props): JSX.Element {
   const { name, type, category, description, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, price, rating, reviewCount } = card;
-
+  const linkTo = `/cameras/${card.id}`;
   return (
     <div className='product-card'>
       <div className='product-card__img'>
@@ -20,8 +20,8 @@ export default function ProductCard({ card }: Props): JSX.Element {
           <img
             src={previewImg}
             srcSet={previewImg2x}
-            width='280'
-            height='240'
+            width={280}
+            height={240}
             alt={description}
           />
         </picture>
@@ -35,13 +35,13 @@ export default function ProductCard({ card }: Props): JSX.Element {
         <p className='product-card__title'>{category} «{name}»</p>
         <p className='product-card__price' >
           <span className='visually-hidden'>Цена:
-          </span>{price} ₽
+          </span>{price.toLocaleString('ru-RU')} ₽
         </p>
       </div>
       <div className='product-card__buttons'>
         <button className='btn btn--purple product-card__btn' type='button'>Купить
         </button>
-        <Link className='btn btn--transparent' to='#'>Подробнее
+        <Link className='btn btn--transparent' to={linkTo}>Подробнее
         </Link>
       </div>
     </div>
