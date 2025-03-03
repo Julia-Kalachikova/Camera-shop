@@ -20,6 +20,13 @@ export default function ProductPage(): JSX.Element {
   const isLoadingProduct = useAppSelector(selectProductLoadingDetails);
   const reviews = useAppSelector(selectProductReviews);
 
+  const handleScrollTuTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   useEffect(() => {
     if (cardId) {
       dispatch(getProductDetailsByID({ cardId }));
@@ -383,7 +390,11 @@ export default function ProductPage(): JSX.Element {
           </div>
         </div>
       </main>
-      <Link className="up-btn" to="#header">
+      <Link
+        className="up-btn"
+        to="#header"
+        onClick={handleScrollTuTop}
+      >
         <svg width="12" height="18" aria-hidden="true">
           <use xlinkHref="#icon-arrow2"></use>
         </svg>
