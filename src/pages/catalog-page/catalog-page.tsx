@@ -4,6 +4,7 @@ import Header from '../../components/header/header';
 import ProductCardList from '../../components/product-card-list/product-card-list';
 import { useAppSelector } from '../../store/store-hooks';
 import { selectCards } from '../../store/selectors';
+import TestComponent from '../../components/test';
 
 
 export default function CatalogPage(): JSX.Element {
@@ -13,6 +14,7 @@ export default function CatalogPage(): JSX.Element {
   return (
     <div className="wrapper">
       <Header />
+      <TestComponent/>
       <main>
         <div className="banner">
           <picture>
