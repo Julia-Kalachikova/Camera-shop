@@ -10,22 +10,17 @@ import Stars from '../../components/stars/stars';
 import Specs from '../../components/bloc-info/specs';
 import Description from '../../components/bloc-info/description';
 import Spinner from '../../components/spinner/spinner';
-import ReviewList from '../../components/reviews-list/revies-list';
+import ReviewList from '../../components/reviews-list/reviews-list';
 
 export default function ProductPage(): JSX.Element {
   const [activeTab, setActiveTab] = useState<'specs' | 'description'>('description');
+
+
   const { id: cardId } = useParams();
   const dispatch = useAppDispatch();
   const productDetails = useAppSelector(selectProductDetails);
   const isLoadingProduct = useAppSelector(selectProductLoadingDetails);
   const reviews = useAppSelector(selectProductReviews);
-
-  const handleScrollTuTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   useEffect(() => {
     if (cardId) {
@@ -96,7 +91,10 @@ export default function ProductPage(): JSX.Element {
                     <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
                   </div>
                   <p className="product__price"><span className="visually-hidden">Цена:</span>{price.toLocaleString('ru-RU')} ₽</p>
-                  <button className="btn btn--purple" type="button">
+                  <button
+                    className="btn btn--purple"
+                    type="button"
+                  >
                     <svg width="24" height="16" aria-hidden="true">
                       <use xlinkHref="#icon-add-basket"></use>
                     </svg>Добавить в корзину
@@ -386,14 +384,13 @@ export default function ProductPage(): JSX.Element {
             </section>
           </div>--> */}
           <div className="page-content__section">
-            <ReviewList reviews={reviews}/>
+            <ReviewList reviews={reviews} />
           </div>
         </div>
       </main>
       <Link
         className="up-btn"
         to="#header"
-        onClick={handleScrollTuTop}
       >
         <svg width="12" height="18" aria-hidden="true">
           <use xlinkHref="#icon-arrow2"></use>

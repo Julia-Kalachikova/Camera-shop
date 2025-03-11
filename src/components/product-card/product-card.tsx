@@ -4,6 +4,7 @@ import Stars from '../stars/stars';
 import { useState } from 'react';
 import ModalContactForm from '../modal-contact-form/modal-contact-form';
 
+
 type Props = {
   card: ProductCardType;
 }
