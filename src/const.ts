@@ -18,10 +18,8 @@ export const totalStars = 5;
 export const FeatureModule = {
   CARDS: 'cards',
   PRODUCT: 'product',
-  BASKET: 'basket',
 } as const;
 
 export enum APIRoutes {
   Cards = '/cameras',
-
 }

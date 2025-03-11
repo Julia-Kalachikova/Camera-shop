@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { RoutePath } from '../../const';
 import CatalogPage from '../../pages/catalog-page/catalog-page';
 import ProductPage from '../../pages/product-page/product-page';
@@ -18,27 +20,30 @@ export default function App(): JSX.Element {
     dispatch(getCardsAction());
   }, [dispatch]);
 
-  if(isLoading) {
-    return <Spinner/>;
+  if (isLoading) {
+    return <Spinner />;
   }
   return (
-    <Routes>
-      <Route
-        path={RoutePath.Catalog}
-        element={<CatalogPage />}
-      />
-      <Route
-        path={RoutePath.Product}
-        element={<ProductPage/>}
-      />
-      <Route
-        path={RoutePath.Basket}
-        element={<BasketPage/>}
-      />
-      <Route
-        path={RoutePath.NOT_FOUND}
-        element={<NotFoundPage/>}
-      />
-    </Routes>
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route
+          path={RoutePath.Catalog}
+          element={<CatalogPage />}
+        />
+        <Route
+          path={RoutePath.Product}
+          element={<ProductPage />}
+        />
+        <Route
+          path={RoutePath.Basket}
+          element={<BasketPage />}
+        />
+        <Route
+          path={RoutePath.NOT_FOUND}
+          element={<NotFoundPage />}
+        />
+      </Routes>
+    </>
   );
 }

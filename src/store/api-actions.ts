@@ -49,4 +49,3 @@ export const getProductReviews = createAsyncThunk<
     return response?.data;
   }
 );
-
