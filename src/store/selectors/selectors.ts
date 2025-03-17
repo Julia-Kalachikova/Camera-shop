@@ -1,5 +1,6 @@
-import { FeatureModule } from '../const';
-import { StateType } from './store-types';
+import { FeatureModule } from '../../const';
+import { StateType } from '../store-types';
+
 
 export const selectCards = (state: StateType) => state[FeatureModule.CARDS].cards;
 
