@@ -1,7 +1,7 @@
 import { selectCards, selectProductLoadingReviews, selectProductReviews, selectIsLoadingCards, selectProductDetails, selectProductLoadingDetails } from './selectors';
 import { FeatureModule } from '../../const';
 import { StateType } from '../store-types';
-import { cardMock, cardsMocks, reviewMock } from '../testing-mocks';
+import { cardMock, cardsMocks, reviewMock } from '../../testing-mocks';
 
 
 describe('selectCards', () => {

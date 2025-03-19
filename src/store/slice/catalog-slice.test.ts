@@ -1,6 +1,6 @@
 import { ProductCardType } from '../../types';
 import { getCardsAction } from '../api-actions/api-actions';
-import { cardMock } from '../testing-mocks';
+import { cardMock } from '../../testing-mocks';
 import { cardsSlice } from './catalog-slice';
 
 

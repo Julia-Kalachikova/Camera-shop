@@ -1,4 +1,4 @@
-import { ProductCardType, ReviewType } from '../types';
+import { ProductCardType, ReviewType } from './types';
 
 export const cardsMocks: ProductCardType[] = [
   {

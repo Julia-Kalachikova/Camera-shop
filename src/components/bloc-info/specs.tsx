@@ -7,7 +7,7 @@ type Props = {
 
 export default function Specs({ vendorCode, category, type, level }: Props): JSX.Element {
   return (
-    <ul className="product__tabs-list">
+    <ul className="product__tabs-list" data-testid="specs">
       <li className="item-list"><span className="item-list__title">Артикул:</span>
         <p className="item-list__text">{vendorCode}</p>
       </li>

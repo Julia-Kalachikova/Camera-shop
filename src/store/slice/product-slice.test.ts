@@ -1,6 +1,6 @@
 import { ProductCardType, ReviewType } from '../../types';
 import { getProductDetailsByID, getProductReviews } from '../api-actions/api-actions';
-import { cardMock, reviewMock } from '../testing-mocks';
+import { cardMock, reviewMock } from '../../testing-mocks';
 import { productDetailsSlice } from './product-details-slice';
 
 describe('productDetailsSlice', () => {
