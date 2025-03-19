@@ -1,16 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
-import { APIRoutes } from '../const';
-import { ProductCardType, ReviewType } from '../types';
-import { StateType } from './store-types';
-import { store } from './index-store';
+
+import { APIRoutes } from '../../const';
+import { StateType } from '../store-types';
+import { store } from '../index-store';
+import { ProductCardType, ReviewType } from '../../types';
 
 
 export const getCardsAction = createAsyncThunk<ProductCardType[],
 undefined,
 {
-  dispatch: typeof store.dispatch;
+  dispatch: typeof store
+  .dispatch;
   state: StateType;
   extra: AxiosInstance;
 }>(

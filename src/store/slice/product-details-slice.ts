@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductCardType, ReviewType } from '../../types';
 import { FeatureModule } from '../../const';
-import { getProductDetailsByID, getProductReviews } from '../api-actions';
+import { getProductDetailsByID, getProductReviews } from '../api-actions/api-actions';
+
 
 export type ProductSliceType = {
   productDetails: ProductCardType | null;
