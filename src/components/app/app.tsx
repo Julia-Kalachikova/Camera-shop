@@ -7,10 +7,11 @@ import ProductPage from '../../pages/product-page/product-page';
 import BasketPage from '../../pages/basket-page/basket-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
-import { selectIsLoadingCards } from '../../store/selectors';
+
 import { useEffect } from 'react';
-import { getCardsAction } from '../../store/api-actions';
+import { getCardsAction } from '../../store/api-actions/api-actions';
 import Spinner from '../spinner/spinner';
+import { selectIsLoadingCards } from '../../store/selectors/selectors';
 
 export default function App(): JSX.Element {
   const dispatch = useAppDispatch();

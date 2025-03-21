@@ -4,7 +4,7 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ProductCardList from '../../components/product-card-list/product-card-list';
 import { useAppSelector } from '../../store/store-hooks';
-import { selectCards } from '../../store/selectors';
+import { selectCards } from '../../store/selectors/selectors';
 
 
 export default function CatalogPage(): JSX.Element {
@@ -12,7 +12,7 @@ export default function CatalogPage(): JSX.Element {
   const productCards = useAppSelector(selectCards);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" data-testid='catalog'>
       <Header />
       <main>
         <div className="banner">

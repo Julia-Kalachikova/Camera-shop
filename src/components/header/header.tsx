@@ -3,9 +3,9 @@ import { RoutePath } from '../../const';
 
 export default function Header(): JSX.Element {
   return (
-    <header className='header' id='header'>
-      <div className='container'>
-        <Link className='header__logo' to='index.html' aria-label='Переход на главную'>
+    <header className='header' id='header' data-testid="header">
+      <div className='container' >
+        <Link className='header__logo' to={RoutePath.Catalog} aria-label='Переход на главную'>
           <svg width='100' height='36' aria-hidden='true'>
             <use xlinkHref='#icon-logo'></use>
           </svg>

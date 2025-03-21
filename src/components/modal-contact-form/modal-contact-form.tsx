@@ -76,6 +76,7 @@ export default function ModalContactForm({ productCard, onClose }: Props): JSX.E
       aria-modal='true'
       tabIndex={-1}
       ref={modalRef}
+      data-testid="form"
     >
       <div className="modal__wrapper">
         <div

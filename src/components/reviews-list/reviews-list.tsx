@@ -26,7 +26,7 @@ export default function ReviewList({ reviews }: Props): JSX.Element {
 
 
   return (
-    <section className='review-block'>
+    <section className='review-block' data-testid='reviews_list'>
       <div className='container'>
         <div className='page-content__headed'>
           <h2 className='title title--h3'>Отзывы</h2>
