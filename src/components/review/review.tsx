@@ -15,7 +15,7 @@ export default function Review({reviewTitle}: Props): JSX.Element {
   const {userName, advantage, disadvantage, review, rating, createAt} = reviewTitle;
   const formattedDate = formatDate(createAt);
   return (
-    <li className="review-card">
+    <li className="review-card" data-testid='review'>
       <div className="review-card__head">
         <p className="title title--h4">{userName}</p>
         <time className="review-card__data" dateTime="2022-04-13">{formattedDate}</time>

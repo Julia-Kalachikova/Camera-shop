@@ -1,7 +1,7 @@
 import { selectCards, selectProductLoadingReviews, selectProductReviews, selectIsLoadingCards, selectProductDetails, selectProductLoadingDetails } from './selectors';
 import { FeatureModule } from '../../const';
 import { StateType } from '../store-types';
-import { cardMock, cardsMocks, reviewMock } from '../../testing-mocks';
+import { cardMock, cardsMocks, reviewsMock } from '../../testing-mocks';
 
 
 describe('selectCards', () => {
@@ -99,7 +99,7 @@ describe('selectCards', () => {
       [FeatureModule.PRODUCT]: {
         productDetails: null,
         productLoadingDetails: false,
-        productReviews: reviewMock,
+        productReviews: reviewsMock,
         productLoadingReviews: false,
       },
     };
@@ -108,7 +108,7 @@ describe('selectCards', () => {
     const result = selectProductReviews(mockState);
 
     // Проверяем, что селектор вернул правильные данные
-    expect(result).toEqual(reviewMock);
+    expect(result).toEqual(reviewsMock);
   });
   it('должен вернуть productLoadingReviews из состояния', () => {
     // Моковое состояние

@@ -23,7 +23,7 @@ export default function ProductCard({ card }: Props): JSX.Element {
   };
 
   return (
-    <div className='product-card'>
+    <div className='product-card' data-testid="card">
       <div className='product-card__img'>
         <picture>
           <source

@@ -1,6 +1,6 @@
 import { ProductCardType, ReviewType } from '../../types';
 import { getProductDetailsByID, getProductReviews } from '../api-actions/api-actions';
-import { cardMock, reviewMock } from '../../testing-mocks';
+import { cardMock, reviewsMock } from '../../testing-mocks';
 import { productDetailsSlice } from './product-details-slice';
 
 describe('productDetailsSlice', () => {
@@ -72,7 +72,7 @@ describe('productDetailsSlice', () => {
   });
 
   it('hould set productReviews and productLoadingReviews to false with "getProductReviews.fulfilled"', () => {
-    const mockData: ReviewType[] = reviewMock;
+    const mockData: ReviewType[] = reviewsMock;
     const expectedState = {
       productDetails: null,
       productLoadingDetails: true,

@@ -15,7 +15,6 @@ import ReviewList from '../../components/reviews-list/reviews-list';
 export default function ProductPage(): JSX.Element {
   const [activeTab, setActiveTab] = useState<'specs' | 'description'>('description');
 
-
   const { id: cardId } = useParams();
   const dispatch = useAppDispatch();
   const productDetails = useAppSelector(selectProductDetails);
@@ -39,7 +38,7 @@ export default function ProductPage(): JSX.Element {
   const { name, type, category, description, vendorCode, level, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, price, rating, reviewCount } = productDetails;
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" data-testid='product'>
       <Header />
       <main>
         <div className="page-content">
@@ -391,6 +390,10 @@ export default function ProductPage(): JSX.Element {
       <Link
         className="up-btn"
         to="#header"
+        onClick={(evt) => {
+          evt.preventDefault();
+          document.getElementById('header')?.scrollIntoView({ behavior: 'smooth' });
+        }}
       >
         <svg width="12" height="18" aria-hidden="true">
           <use xlinkHref="#icon-arrow2"></use>

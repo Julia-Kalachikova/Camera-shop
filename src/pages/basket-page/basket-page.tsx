@@ -4,7 +4,7 @@ import Footer from '../../components/footer/footer';
 
 export default function BasketPage(): JSX.Element {
   return (
-    <div className="wrapper">
+    <div className="wrapper" data-testid='basket'>
       <Header />
       <main>
         <div className="page-content">
