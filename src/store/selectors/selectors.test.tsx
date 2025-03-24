@@ -1,4 +1,4 @@
-import { selectCards, selectProductLoadingReviews, selectProductReviews, selectIsLoadingCards, selectProductDetails, selectProductLoadingDetails } from './selectors';
+import { selectCards, selectProductLoadingReviews, selectProductReviews, selectIsLoadingCards, selectProductDetails, selectProductLoadingDetails, selectCallRequestError } from './selectors';
 import { FeatureModule } from '../../const';
 import { StateType } from '../store-types';
 import { cardMock, cardsMocks, reviewsMock } from '../../testing-mocks';
@@ -11,6 +11,9 @@ describe('selectCards', () => {
       [FeatureModule.CARDS]: {
         cards: cardsMocks,
         isLoadingCards: false,
+        isSendingRequest: false,
+        requestError: null,
+
       },
       [FeatureModule.PRODUCT]: {
         productDetails: null,
@@ -30,6 +33,8 @@ describe('selectCards', () => {
       [FeatureModule.CARDS]: {
         cards: [],
         isLoadingCards: true,
+        isSendingRequest: false,
+        requestError: null,
       },
       [FeatureModule.PRODUCT]: {
         productDetails: null,
@@ -49,6 +54,8 @@ describe('selectCards', () => {
       [FeatureModule.CARDS]: {
         cards: [],
         isLoadingCards: false,
+        isSendingRequest: false,
+        requestError: null,
       },
       [FeatureModule.PRODUCT]: {
         productDetails: cardMock,
@@ -68,6 +75,8 @@ describe('selectCards', () => {
       [FeatureModule.CARDS]: {
         cards: [],
         isLoadingCards: false,
+        isSendingRequest: false,
+        requestError: null,
       },
       [FeatureModule.PRODUCT]: {
         productDetails: null,
@@ -87,6 +96,8 @@ describe('selectCards', () => {
       [FeatureModule.CARDS]: {
         cards: [],
         isLoadingCards: false,
+        isSendingRequest: false,
+        requestError: null,
       },
       [FeatureModule.PRODUCT]: {
         productDetails: null,
@@ -106,6 +117,8 @@ describe('selectCards', () => {
       [FeatureModule.CARDS]: {
         cards: [],
         isLoadingCards: false,
+        isSendingRequest: false,
+        requestError: null,
       },
       [FeatureModule.PRODUCT]: {
         productDetails: null,
@@ -118,6 +131,50 @@ describe('selectCards', () => {
     const result = selectProductLoadingReviews(mockState);
 
     expect(result).toBe(true);
+  });
+});
+
+describe('selectCallRequestError', () => {
+  it('должен вернуть requestError из состояния', () => {
+    const mockState: StateType = {
+      [FeatureModule.CARDS]: {
+        cards: [],
+        isLoadingCards: false,
+        isSendingRequest: false,
+        requestError: 'Ошибка отправки запроса',
+      },
+      [FeatureModule.PRODUCT]: {
+        productDetails: null,
+        productLoadingDetails: false,
+        productReviews: [],
+        productLoadingReviews: false,
+      },
+    };
+
+    const result = selectCallRequestError(mockState);
+
+    expect(result).toBe('Ошибка отправки запроса');
+  });
+
+  it('должен вернуть null, если ошибки нет', () => {
+    const mockState: StateType = {
+      [FeatureModule.CARDS]: {
+        cards: [],
+        isLoadingCards: false,
+        isSendingRequest: false,
+        requestError: null,
+      },
+      [FeatureModule.PRODUCT]: {
+        productDetails: null,
+        productLoadingDetails: false,
+        productReviews: [],
+        productLoadingReviews: false,
+      },
+    };
+
+    const result = selectCallRequestError(mockState);
+
+    expect(result).toBeNull();
   });
 });
 

@@ -10,6 +10,8 @@ describe('cardsSlice', () => {
     const expectedState = {
       cards: [],
       isLoadingCards: true,
+      isSendingRequest: false,
+      requestError: null,
     };
 
     const result = cardsSlice.reducer(undefined, emptyAction);
@@ -20,6 +22,8 @@ describe('cardsSlice', () => {
     const expectedState = {
       cards: [],
       isLoadingCards: true,
+      isSendingRequest: false,
+      requestError: null,
     };
 
     const result = cardsSlice.reducer(undefined, getCardsAction.pending);
@@ -31,6 +35,8 @@ describe('cardsSlice', () => {
     const expectedState = {
       cards: mockData,
       isLoadingCards: false,
+      isSendingRequest: false,
+      requestError: null,
     };
 
     const result = cardsSlice.reducer(
@@ -44,6 +50,8 @@ describe('cardsSlice', () => {
     const expectedState = {
       cards: [],
       isLoadingCards: false,
+      isSendingRequest: false,
+      requestError: null,
     };
 
     const result = cardsSlice.reducer(undefined, getCardsAction.rejected);
@@ -51,3 +59,5 @@ describe('cardsSlice', () => {
     expect(result).toEqual(expectedState);
   });
 });
+
+

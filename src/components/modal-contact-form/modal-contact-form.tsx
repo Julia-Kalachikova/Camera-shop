@@ -1,7 +1,11 @@
-import { ProductCardType } from '../../types';
+import { CallRequestType, ProductCardType } from '../../types';
 import { toast } from 'react-toastify';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useRef, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
+import { sendCallRequest } from '../../store/api-actions/api-actions';
+import { selectCallRequestError } from '../../store/selectors/selectors';
+import { setRequestError } from '../../store/slice/catalog-slice';
 
 type Props = {
   productCard: ProductCardType;
@@ -21,18 +25,21 @@ export default function ModalContactForm({ productCard, onClose }: Props): JSX.E
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
+  const requestError = useAppSelector(selectCallRequestError);
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-
     setIsSubmitting(true);
     try {
       const formattedPhone = data.phone.replace(/\D/g, '').replace(/^8/, '+7');
-      if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.log('Отправка данных:', { phone: formattedPhone });
-      }
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const requestData: CallRequestType = {
+        camerasIds: [Number(productCard.id)],
+        coupon: null,
+        tel: formattedPhone
+      };
+
+      await dispatch(sendCallRequest(requestData)).unwrap();
       toast.success('Ваш запрос успешно отправлен!');
       onClose();
     } catch (error) {
@@ -41,6 +48,13 @@ export default function ModalContactForm({ productCard, onClose }: Props): JSX.E
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (requestError) {
+      toast.error(requestError);
+      dispatch(setRequestError(null));
+    }
+  }, [requestError, dispatch]);
 
   const handleOverlayClick = (evt: React.MouseEvent<HTMLDivElement>) => {
     if (evt.target === evt.currentTarget) {

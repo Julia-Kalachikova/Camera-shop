@@ -28,3 +28,10 @@ export type ReviewType = {
     review: string;
     rating: number;
 };
+
+
+export type CallRequestType = {
+    camerasIds: [number];
+    coupon: null;
+    tel: string;
+  };
