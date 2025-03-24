@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ProductCardList from '../../components/product-card-list/product-card-list';

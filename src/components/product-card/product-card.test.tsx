@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import ProductCard from './product-card';
 import { BrowserRouter } from 'react-router-dom';
+import ProductCard from './product-card';
 import { cardMock } from '../../testing-mocks';
+
 
 describe('productCard Component', () => {
   it('should render correct', () => {

@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { cardMock } from '../../testing-mocks';
 import Specs from './specs';
 
+
 describe('Specs Component', () => {
   const mockVendorCode = cardMock.vendorCode;
   const mockCategory = cardMock.category;
@@ -20,7 +21,6 @@ describe('Specs Component', () => {
     const specsElement = screen.getByTestId('specs');
     expect(specsElement).toBeInTheDocument();
 
-    // Проверяем, что vendorCode отображается
     const vendorCodeElement = screen.getByText(mockVendorCode);
     expect(vendorCodeElement).toBeInTheDocument();
 

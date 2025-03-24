@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ProductCardList from './product-card-list';
 import { cardsMocks } from '../../testing-mocks';
 
+
 describe('productCardList Component', () => {
   it('should render correct', () => {
     const mocksCardsList = cardsMocks;

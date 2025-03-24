@@ -1,10 +1,7 @@
-
-
 export enum RoutePath {
   Catalog = '/',
   Product = '/cameras/:id',
   NOT_FOUND = '/*',
-  Basket = '/basket',
 }
 
 export type CameraType = 'Коллекционная' | 'Моментальная' | 'Цифровая' | 'Плёночная';

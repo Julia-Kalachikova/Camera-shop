@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 
 const mockStore = configureStore({
   reducer: {
-    cards: () => ({ cards: cardsMocks }), // Моковый редьюсер
+    cards: () => ({ cards: cardsMocks }),
   },
 });
 

@@ -1,17 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
+
 import { RoutePath } from '../../const';
 import CatalogPage from '../../pages/catalog-page/catalog-page';
 import ProductPage from '../../pages/product-page/product-page';
-import BasketPage from '../../pages/basket-page/basket-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
-
-import { useEffect } from 'react';
 import { getCardsAction } from '../../store/api-actions/api-actions';
 import Spinner from '../spinner/spinner';
 import { selectIsLoadingCards } from '../../store/selectors/selectors';
+
 
 export default function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -35,10 +35,6 @@ export default function App(): JSX.Element {
         <Route
           path={RoutePath.Product}
           element={<ProductPage />}
-        />
-        <Route
-          path={RoutePath.Basket}
-          element={<BasketPage />}
         />
         <Route
           path={RoutePath.NOT_FOUND}

@@ -1,10 +1,12 @@
-import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import App from './app';
-import { FeatureModule, RoutePath } from '../../const';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import { render, screen } from '@testing-library/react';
+
+import App from './app';
+import { FeatureModule, RoutePath } from '../../const';
 import { reviewsMock } from '../../testing-mocks';
+
 
 describe('App Component', () => {
   it('should render CatalogPage on root route', () => {
@@ -31,10 +33,10 @@ describe('App Component', () => {
     const mockStore = configureStore({
       reducer: {
         [ FeatureModule.PRODUCT]: () => ({
-          productDetails: null, // Данные о продукте
-          productLoadingDetails: false, // Флаг загрузки
-          productReviews: reviewsMock, // Список отзывов
-          productLoadingReviews: false, // Флаг загрузки отзывов
+          productDetails: null,
+          productLoadingDetails: false,
+          productReviews: reviewsMock,
+          productLoadingReviews: false,
         }),
         [FeatureModule.CARDS]: () => ({ cards: [], isLoadingCards: false })
       },
@@ -64,13 +66,12 @@ describe('App Component', () => {
       </Provider>
     );
 
-    // Проверяем, что NotFoundPage отображается
     const notFoundPage = screen.getByText(/Page not found/i);
     expect(notFoundPage).toBeInTheDocument();
   });
 
   it('should display spinner while loading', () => {
-    // Моковый store с состоянием загрузки
+
     const mockStore = configureStore({
       reducer: {
         cards: () => ({ cards: [], isLoadingCards: true }),
@@ -85,7 +86,6 @@ describe('App Component', () => {
       </Provider>
     );
 
-    // Проверяем, что спиннер отображается
     const spinner = screen.getByTestId('spinner');
     expect(spinner).toBeInTheDocument();
   });

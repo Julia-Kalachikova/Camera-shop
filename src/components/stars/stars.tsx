@@ -1,6 +1,7 @@
 import React from 'react';
 import { totalStars } from '../../const';
 
+
 type Props = {
   rating: number;
 }

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { RoutePath } from '../../const';
 
+
 export default function Footer(): JSX.Element {
   return (
     <footer className="footer" data-testid="footer">

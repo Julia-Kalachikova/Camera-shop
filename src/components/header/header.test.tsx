@@ -1,21 +1,19 @@
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Header from './header';
 import { BrowserRouter } from 'react-router-dom';
+import Header from './header';
+
 
 describe('Header Component', () => {
   it('should render correctly', () => {
     render(<Header />, {wrapper: BrowserRouter});
 
-    // Проверяем, что компонент отображается
     const headerElement = screen.getByTestId('header');
     expect(headerElement).toBeInTheDocument();
 
-    // Проверяем, что логотип отображается
     const logoElement = screen.getByRole('link', { name: /Переход на главную/i });
     expect(logoElement).toBeInTheDocument();
 
-    // Проверяем, что навигационные ссылки отображаются
     const catalogLink = screen.getByRole('link', { name: /Каталог/i });
     expect(catalogLink).toBeInTheDocument();
 

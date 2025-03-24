@@ -1,6 +1,7 @@
 import { ReviewType } from '../../types';
 import Stars from '../stars/stars';
 
+
 type Props = {
   reviewTitle: ReviewType;
 }

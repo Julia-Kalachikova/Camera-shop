@@ -1,5 +1,6 @@
 import { CameraCategory, CameraLevel, CameraType } from './const';
 
+
 export type ProductCardType = {
   id: number;
   name: string;

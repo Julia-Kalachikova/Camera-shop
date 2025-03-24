@@ -6,14 +6,13 @@ import { Provider } from 'react-redux';
 import ProductPage from './product-page';
 import { FeatureModule } from '../../const';
 
-// Моковый редьюсер
 const mockStore = configureStore({
   reducer: {
     [ FeatureModule.PRODUCT]: () => ({
-      productDetails: cardMock, // Данные о продукте
-      productLoadingDetails: false, // Флаг загрузки
-      productReviews: reviewsMock, // Список отзывов
-      productLoadingReviews: false, // Флаг загрузки отзывов
+      productDetails: cardMock,
+      productLoadingDetails: false,
+      productReviews: reviewsMock,
+      productLoadingReviews: false,
     }),
   },
 });

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ReviewType } from '../../types';
 import Review from '../review/review';
 
+
 type Props = {
   reviews: ReviewType[];
 }

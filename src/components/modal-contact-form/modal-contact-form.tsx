@@ -17,7 +17,7 @@ export default function ModalContactForm({ productCard, onClose }: Props): JSX.E
   const { category, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, price, type, name, vendorCode, level } = productCard;
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>(
-    { mode: 'onChange'});
+    { mode: 'onChange' });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -126,12 +126,9 @@ export default function ModalContactForm({ productCard, onClose }: Props): JSX.E
                   aria-invalid={errors.phone ? 'true' : 'false'}
                 />
                 {errors.phone?.message && (
-                  <>
-                    <p className="custom-input__error" >
-                      {errors.phone.message}
-                    </p>
-                    {console.log('Элемент с ошибкой отрендерился')}
-                  </>
+                  <p className="custom-input__error" >
+                    {errors.phone.message}
+                  </p>
                 )}
               </label>
             </div>
