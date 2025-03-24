@@ -11,8 +11,8 @@ import { ProductCardType, ReviewType } from '../../types';
 export const getCardsAction = createAsyncThunk<ProductCardType[],
 undefined,
 {
-  // dispatch: typeof store
-  // .dispatch;
+  dispatch: typeof store
+  .dispatch;
   state: StateType;
   extra: AxiosInstance;
 }>(
