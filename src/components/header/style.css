@@ -1,0 +1,33 @@
+.form-search {
+  position: relative;
+
+  &__select-list {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 100;
+  }
+
+  &__select-item {
+    padding: 8px;
+    cursor: pointer;
+
+    &.highlighted {
+      background-color: #f0f0f0;
+    }
+  }
+
+  &__reset {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+}
+
