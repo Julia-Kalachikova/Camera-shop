@@ -33,20 +33,9 @@ export default function SearchList({
 
   return (
     <ul
-      className="form-search__select-list"
+      className="form-search__select-list scroller"
       ref={dropdownRef}
-      style={{
-        maxHeight: '176px', // Фиксированная высота для скролла
-        overflowY: 'auto', // Включаем вертикальный скролл
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '4px 0',
-        margin: 0,
-        listStyle: 'none',
-        visibility: 'visible',
-        opacity: 100,
-        scrollBehavior: 'smooth',
-      }}
+      role="listbox"
     >
       {results.map((product, index) => (
         <SearchItem

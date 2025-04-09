@@ -107,6 +107,23 @@ export default function Header(): JSX.Element {
         });
         break;
       }
+      case 'Tab': {
+        evt.preventDefault();
+        if (results.length === 0) {
+          break;
+        }
+        const direction = evt.shiftKey ? -1 : 1;
+        let newIndex = selectedIndex + direction;
+
+        if (newIndex < 0) {
+          newIndex = results.length - 1;
+        } else if (newIndex >= results.length) {
+          newIndex = 0;
+        }
+
+        setSelectedIndex(newIndex);
+        break;
+      }
       case 'Enter':
         if (selectedIndex >= 0) {
           handleSelect(results[selectedIndex]);// Переходим на страницу товара
@@ -152,7 +169,7 @@ export default function Header(): JSX.Element {
             </li>
           </ul>
         </nav>
-        <div className='form-search'>
+        <div className={`form-search ${isDropdownOpen ? 'list-opened' : ''}`}>
           <form onSubmit={(evt) => evt.preventDefault()}>
             <label>
               <svg className='form-search__icon' width='16' height='16' aria-hidden='true'>

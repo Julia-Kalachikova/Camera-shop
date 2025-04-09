@@ -9,19 +9,6 @@ type Props = {
 }
 
 export default function SearchItem({ product, isSelected, onSelect, onHover }: Props): JSX.Element {
-  // Inline-стили для разных состояний
-  const baseStyle: React.CSSProperties = {
-    padding: '8px 16px',
-    fontWeight: 600,
-    color: '#333333',
-    borderRadius: '8px',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    backgroundColor: isSelected ? '#e6e6ff' : 'transparent',
-    margin: '2px 0',
-    display: 'block',
-    outline: 'none', // Убираем стандартный outline
-  };
 
   const handleKeyDown = (evt: KeyboardEvent<HTMLLIElement>) => {
     if (evt.key === 'Enter') {
@@ -39,7 +26,8 @@ export default function SearchItem({ product, isSelected, onSelect, onHover }: P
 
   return (
     <li
-      style={baseStyle}
+      className="form-search__select-item"
+      style={{backgroundColor: isSelected ? '#f4f4fc' : 'transparent',}}
       tabIndex={0}
       onClick={handleClick}
       onMouseEnter={onHover}
