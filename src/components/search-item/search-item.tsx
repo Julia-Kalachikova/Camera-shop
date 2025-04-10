@@ -13,14 +13,12 @@ export default function SearchItem({ product, isSelected, onSelect, onHover }: P
   const handleKeyDown = (evt: KeyboardEvent<HTMLLIElement>) => {
     if (evt.key === 'Enter') {
       evt.preventDefault();
-      evt.stopPropagation();
       onSelect(); // Вызываем onSelect напрямую
     }
   };
 
   const handleClick = (evt: MouseEvent<HTMLLIElement>) => {
     evt.preventDefault(); // Предотвращаем стандартное поведение
-    evt.stopPropagation(); // Останавливаем всплытие
     onSelect();
   };
 
@@ -33,6 +31,7 @@ export default function SearchItem({ product, isSelected, onSelect, onHover }: P
       onMouseEnter={onHover}
       aria-selected={isSelected}
       onKeyDown={handleKeyDown}
+      role="option"
     >
       {product.name}
     </li>
