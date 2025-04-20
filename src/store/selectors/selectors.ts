@@ -1,4 +1,5 @@
-import { FeatureModule } from '../../const';
+import { CameraLevel, CameraType, FeatureModule } from '../../const';
+import { ProductCardType } from '../../types';
 import { StateType } from '../store-types';
 
 
@@ -16,3 +17,49 @@ export const selectProductLoadingReviews = (state: StateType) => state[FeatureMo
 
 export const selectCallRequestError = (state: StateType) => state[FeatureModule.CARDS].requestError;
 
+export const selectFilteredCards = (state: StateType): ProductCardType[] => {
+  const { cards } = state[FeatureModule.CARDS];
+  const { price, category, types, levels } = state.filters;
+
+  return cards.filter((card: ProductCardType) => {
+
+    const minPrice = price.currentMin === '' ? price.min : Number(price.currentMin);
+    const maxPrice = price.currentMax === '' ? price.max : Number(price.currentMax);
+
+    if (price.currentMin !== '' &&
+      price.currentMax !== '' &&
+      price.currentMin === price.currentMax &&
+      card.price !== Number(price.currentMin)) {
+      return false;
+    }
+
+    // Фильтрация по цене
+    if (card.price < minPrice || card.price > maxPrice) {
+      return false;
+    }
+
+    // Фильтрация по категории
+    if (category && card.category !== category) {
+      return false;
+    }
+
+    // Фильтрация по типу
+    const activeTypes = (Object.entries(types) as [CameraType, boolean][])
+      .filter(([, isActive]) => isActive)
+      .map(([type]) => type);
+
+    if (activeTypes.length > 0 && !activeTypes.includes(card.type)) {
+      return false;
+    }
+
+    // Фильтрация по уровню
+    const activeLevels = (Object.entries(levels) as [CameraLevel, boolean][])
+      .filter(([, isActive]) => isActive)
+      .map(([level]) => level);
+
+    if (activeLevels.length > 0 && !activeLevels.includes(card.level)) {
+      return false;
+    }
+    return true;
+  });
+};
