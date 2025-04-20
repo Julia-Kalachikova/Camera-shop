@@ -45,8 +45,6 @@ export const filtersSlice = createSlice({
     setPriceRange(state, action: PayloadAction<{min: number; max: number}>) {
       state.price.min = action.payload.min;
       state.price.max = action.payload.max;
-      state.price.currentMin = action.payload.min;
-      state.price.currentMax = action.payload.max;
     },
     setMinPrice(state, action: PayloadAction<number | ''>) {
       state.price.currentMin = action.payload;
