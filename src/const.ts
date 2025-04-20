@@ -15,6 +15,7 @@ export const totalStars = 5;
 export const FeatureModule = {
   CARDS: 'cards',
   PRODUCT: 'product',
+  SORTING: 'sorting',
   FILTERS: 'filters',
 } as const;
 
