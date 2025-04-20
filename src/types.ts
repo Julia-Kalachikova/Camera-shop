@@ -19,19 +19,29 @@ export type ProductCardType = {
 };
 
 export type ReviewType = {
-    id: string;
-    createAt: string;
-    cameraId: number;
-    userName: string;
-    advantage: string;
-    disadvantage: string;
-    review: string;
-    rating: number;
+  id: string;
+  createAt: string;
+  cameraId: number;
+  userName: string;
+  advantage: string;
+  disadvantage: string;
+  review: string;
+  rating: number;
 };
 
 
 export type CallRequestType = {
-    camerasIds: [number];
-    coupon: null;
-    tel: string;
-  };
+  camerasIds: [number];
+  coupon: null;
+  tel: string;
+};
+
+export enum SortType {
+  Price = 'price',
+  Popular = 'popular'
+}
+
+export enum SortOrder {
+  Asc = 'asc',
+  Desc = 'desc'
+}

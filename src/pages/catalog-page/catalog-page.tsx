@@ -3,13 +3,14 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ProductCardList from '../../components/product-card-list/product-card-list';
 import { useAppSelector } from '../../store/store-hooks';
-import { selectFilteredCards } from '../../store/selectors/selectors';
+import { selectSortedProducts } from '../../store/selectors/selectors';
 import Filters from '../../components/filters/filters';
+import Sorting from '../../components/sorting/sorting';
 
 
 export default function CatalogPage(): JSX.Element {
 
-  const productCards = useAppSelector(selectFilteredCards);
+  const productCards = useAppSelector(selectSortedProducts);
 
   return (
     <div className="wrapper" data-testid='catalog'>
@@ -46,41 +47,7 @@ export default function CatalogPage(): JSX.Element {
                   <Filters />
                 </div>
                 <div className="catalog__content">
-                  <div className="catalog-sort">
-                    <form action="#">
-                      <div className="catalog-sort__inner">
-                        <p className="title title&#45;&#45;h5">Сортировать:</p>
-                        <div className="catalog-sort__type">
-                          <div className="catalog-sort__btn-text">
-                            <input type="radio" id="sortPrice" name="sort" checked />
-                            <label htmlFor="sortPrice">по цене</label>
-                          </div>
-                          <div className="catalog-sort__btn-text">
-                            <input type="radio" id="sortPopular" name="sort" />
-                            <label htmlFor="sortPopular">по популярности</label>
-                          </div>
-                        </div>
-                        <div className="catalog-sort__order">
-                          <div className="catalog-sort__btn catalog-sort__btn&#45;&#45;up">
-                            <input type="radio" id="up" name="sort-icon" checked aria-label="По возрастанию" />
-                            <label htmlFor="up">
-                              <svg width="16" height="14" aria-hidden="true">
-                                <use xlinkHref="#icon-sort"></use>
-                              </svg>
-                            </label>
-                          </div>
-                          <div className="catalog-sort__btn catalog-sort__btn&#45;&#45;down">
-                            <input type="radio" id="down" name="sort-icon" aria-label="По убыванию" />
-                            <label htmlFor="down">
-                              <svg width="16" height="14" aria-hidden="true">
-                                <use xlinkHref="#icon-sort"></use>
-                              </svg>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
+                  <Sorting/>
                   <ProductCardList productCards={productCards} />
                   {/* <div className="pagination">
                   <ul className="pagination__list">
