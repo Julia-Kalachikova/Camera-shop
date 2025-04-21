@@ -3,14 +3,15 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ProductCardList from '../../components/product-card-list/product-card-list';
 import { useAppSelector } from '../../store/store-hooks';
-import { selectSortedProducts } from '../../store/selectors/selectors';
+import { selectProcessedCards } from '../../store/selectors/selectors';
 import Filters from '../../components/filters/filters';
 import Sorting from '../../components/sorting/sorting';
+import Pagination from '../../components/pagination/pagination';
 
 
 export default function CatalogPage(): JSX.Element {
 
-  const productCards = useAppSelector(selectSortedProducts);
+  const productCards = useAppSelector(selectProcessedCards);
 
   return (
     <div className="wrapper" data-testid='catalog'>
@@ -47,20 +48,9 @@ export default function CatalogPage(): JSX.Element {
                   <Filters />
                 </div>
                 <div className="catalog__content">
-                  <Sorting/>
+                  <Sorting />
                   <ProductCardList productCards={productCards} />
-                  {/* <div className="pagination">
-                  <ul className="pagination__list">
-                    <li className="pagination__item"><a className="pagination__link pagination__link&#45;&#45;active" href="1">1</a>
-                    </li>
-                    <li className="pagination__item"><a className="pagination__link" href="2">2</a>
-                    </li>
-                    <li className="pagination__item"><a className="pagination__link" href="3">3</a>
-                    </li>
-                    <li className="pagination__item"><a className="pagination__link pagination__link&#45;&#45;text" href="2">Далее</a>
-                    </li>
-                  </ul>
-                </div> */}
+                  <Pagination/>
                 </div>
               </div>
             </div>

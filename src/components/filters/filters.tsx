@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { selectCards, selectFilteredCards } from '../../store/selectors/selectors';
+import { selectCards, selectFilteredCards} from '../../store/selectors/selectors';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { StateType } from '../../store/store-types';
 import { resetFilters, setCategory, setLevel, setMaxPrice, setMinPrice, setPriceRange, setType } from '../../store/slice/filters-slice';
