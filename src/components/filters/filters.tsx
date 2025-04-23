@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { selectCards, selectFilteredCards } from '../../store/selectors/selectors';
+import { selectCards, selectFilteredCards} from '../../store/selectors/selectors';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { StateType } from '../../store/store-types';
-import { resetFilters, setCategory, setLevel, setMaxPrice, setMinPrice, setPriceRange, setType } from '../../store/slice/filters-slice';
+import { resetFilters, setCategory, setLevel, setMaxPrice, setMinPrice, setPriceRange, setType, updateFilteredPriceRange } from '../../store/slice/filters-slice';
 import FilterCheckboxItem from '../filter-checkbox-item/filter-checkbox-item';
 
 export default function Filters(): JSX.Element {
@@ -27,7 +27,7 @@ export default function Filters(): JSX.Element {
       const minPrice = Math.min(...price);
       const maxPrice = Math.max(...price);
 
-      dispatch(setPriceRange({
+      dispatch(updateFilteredPriceRange({
         min: minPrice,
         max: maxPrice
       }));
@@ -90,7 +90,7 @@ export default function Filters(): JSX.Element {
                 <input
                   type="number"
                   name="price"
-                  placeholder={`${filters.price.min}`}
+                  placeholder={`${filters.price.defaultMin}`}
                   value={filters.price.currentMin}
                   onChange={handleMinPriceChange}
                   min={filters.price.min}

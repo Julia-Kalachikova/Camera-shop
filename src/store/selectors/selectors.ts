@@ -19,17 +19,6 @@ export const selectCallRequestError = (state: StateType) => state[FeatureModule.
 
 export const selectSorting = (state: StateType) => state.sorting;
 
-export const selectSortedProducts = (state: StateType): ProductCardType[] => {
-  const products = selectCards(state);
-  const { type, order } = state.sorting;
-
-  return [...products].sort((a, b) => {
-    const valueA = type === SortType.Price ? a.price : a.rating;
-    const valueB = type === SortType.Price ? b.price : b.rating;
-    return order === SortOrder.Asc ? valueA - valueB : valueB - valueA;
-  });
-};
-
 export const selectFilteredCards = (state: StateType): ProductCardType[] => {
   const { cards } = state[FeatureModule.CARDS];
   const { price, category, types, levels } = state.filters;
@@ -74,5 +63,16 @@ export const selectFilteredCards = (state: StateType): ProductCardType[] => {
       return false;
     }
     return true;
+  });
+};
+
+export const selectProcessedCards = (state: StateType): ProductCardType[] => {
+  const filteredProducts = selectFilteredCards(state);
+  const { type, order } = state.sorting;
+
+  return [...filteredProducts].sort((a, b) => {
+    const valueA = type === SortType.Price ? a.price : a.rating;
+    const valueB = type === SortType.Price ? b.price : b.rating;
+    return order === SortOrder.Asc ? valueA - valueB : valueB - valueA;
   });
 };
