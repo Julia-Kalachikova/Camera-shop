@@ -23,15 +23,17 @@ export const selectFilteredCards = (state: StateType): ProductCardType[] => {
   const { cards } = state[FeatureModule.CARDS];
   const { price, category, types, levels } = state.filters;
 
+  const minPrice = price.currentMin === '' ? price.defaultMin : price.currentMin;
+  const maxPrice = price.currentMax === '' ? price.defaultMax : price.currentMax;
+
   return cards.filter((card: ProductCardType) => {
-
-    const minPrice = price.currentMin === '' ? price.min : Number(price.currentMin);
-    const maxPrice = price.currentMax === '' ? price.max : Number(price.currentMax);
-
-    if (price.currentMin !== '' &&
+    // Если задали одинаковый exact-диапазон, показываем только товары с этой ценой:
+    if (
+      price.currentMin !== '' &&
       price.currentMax !== '' &&
       price.currentMin === price.currentMax &&
-      card.price !== Number(price.currentMin)) {
+      card.price !== price.currentMin
+    ) {
       return false;
     }
 

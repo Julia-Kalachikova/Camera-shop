@@ -1,74 +1,64 @@
 import React, { useEffect } from 'react';
-import { selectCards, selectFilteredCards} from '../../store/selectors/selectors';
+import { selectCards } from '../../store/selectors/selectors';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { StateType } from '../../store/store-types';
-import { resetFilters, setCategory, setLevel, setMaxPrice, setMinPrice, setPriceRange, setType, updateFilteredPriceRange } from '../../store/slice/filters-slice';
+import { resetFilters, setCategory, setLevel, setMaxPrice, setMinPrice, setPriceRange, setType } from '../../store/slice/filters-slice';
 import FilterCheckboxItem from '../filter-checkbox-item/filter-checkbox-item';
 
 export default function Filters(): JSX.Element {
   const dispatch = useAppDispatch();
   const filters = useAppSelector((state: StateType) => state.filters);
   const productCards = useAppSelector(selectCards);
-  const filteredCards = useAppSelector(selectFilteredCards);
 
   // При загрузке устанавливаем диапазон цен
   useEffect(() => {
     if (productCards.length > 0) {
-      const prices = productCards.map((product) => product.price);
-      const minPrice = Math.min(...prices);
-      const maxPrice = Math.max(...prices);
-      dispatch(setPriceRange({ min: minPrice, max: maxPrice }));
+      const prices = productCards.map(p => p.price);
+      dispatch(setPriceRange({
+        min: Math.min(...prices),
+        max: Math.max(...prices),
+      }));
     }
   }, [productCards, dispatch]);
 
-  useEffect(() => {
-    if (filteredCards.length > 0) {
-      const price = filteredCards.map((card) => card.price);
-      const minPrice = Math.min(...price);
-      const maxPrice = Math.max(...price);
-
-      dispatch(updateFilteredPriceRange({
-        min: minPrice,
-        max: maxPrice
-      }));
-    }
-  }, [filteredCards, dispatch]);
-
 
   const handleMinPriceChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = evt.target.value;
-    let value: number | '' = inputValue === '' ? '' : Number(inputValue);
+    const v = evt.target.value === '' ? '' : Number(evt.target.value);
+    dispatch(setMinPrice(v));
+  };
 
-    // Если введенное значение больше текущего максимума, обновляем максимум
-    if (value !== '') {
-      // Проверка на минимальную цену
-      if (value < filters.price.min) {
-        value = filters.price.min;
-      }
+  const handleMaxPriceChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const v = evt.target.value === '' ? '' : Number(evt.target.value);
+    dispatch(setMaxPrice(v));
+  };
 
-      if (filters.price.currentMax !== '' && value > filters.price.currentMax) {
-        dispatch(setMaxPrice(value));
-      }
+  const handleMinPriceBlur = () => {
+    // берем введённое или default
+    let value = filters.price.currentMin === ''
+      ? filters.price.defaultMin
+      : filters.price.currentMin;
+
+    // корректируем по границам
+    if (value < filters.price.defaultMin) {
+      value = filters.price.defaultMin;
+    }
+    if (value > (filters.price.currentMax || filters.price.defaultMax)) {
+      value = filters.price.currentMax || filters.price.defaultMax;
     }
 
     dispatch(setMinPrice(value));
   };
 
-  const handleMaxPriceChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = evt.target.value;
-    let value: number | '' = inputValue === '' ? '' : Number(inputValue);
+  const handleMaxPriceBlur = () => {
+    let value = filters.price.currentMax === ''
+      ? filters.price.defaultMax
+      : filters.price.currentMax;
 
-    // Если введено значение больше максимального
-    if (value !== '') {
-      // Проверка на максимальную цену
-      if (value > filters.price.max) {
-        value = filters.price.max;
-      }
-
-      // Если введено значение меньше текущего минимума
-      if (filters.price.currentMin !== '' && value < filters.price.currentMin) {
-        dispatch(setMinPrice(value));
-      }
+    if (value > filters.price.defaultMax) {
+      value = filters.price.defaultMax;
+    }
+    if (value < (filters.price.currentMin || filters.price.defaultMin)) {
+      value = filters.price.currentMin || filters.price.defaultMin;
     }
 
     dispatch(setMaxPrice(value));
@@ -93,6 +83,7 @@ export default function Filters(): JSX.Element {
                   placeholder={`${filters.price.defaultMin}`}
                   value={filters.price.currentMin}
                   onChange={handleMinPriceChange}
+                  onBlur={handleMinPriceBlur}
                   min={filters.price.min}
                   max={filters.price.currentMax || filters.price.max}
                 />
@@ -106,6 +97,7 @@ export default function Filters(): JSX.Element {
                   placeholder={`${filters.price.max}`}
                   value={filters.price.currentMax}
                   onChange={handleMaxPriceChange}
+                  onBlur={handleMaxPriceBlur}
                   min={filters.price.currentMin || filters.price.min}
                   max={filters.price.max}
                 />

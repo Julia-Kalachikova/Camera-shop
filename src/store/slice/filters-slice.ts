@@ -48,28 +48,15 @@ export const filtersSlice = createSlice({
   reducers: {
     setPriceRange(state, action: PayloadAction<{min: number; max: number}>) {
       const { min, max } = action.payload;
-      state.price.min = min;
-      state.price.max = max;
       // Устанавливаем дефолтные, если они ещё не заданы
       if (state.price.defaultMin === 0 && state.price.defaultMax === 0) {
         state.price.defaultMin = min;
         state.price.defaultMax = max;
-        state.price.currentMin = min;
-        state.price.currentMax = max;
       }
-    },
-    updateFilteredPriceRange(state, action: PayloadAction<{min: number; max: number}>) {
-      const { min, max } = action.payload;
-      state.price.min = min;
-      state.price.max = max;
-
-      // Обновим текущие, если они вне нового диапазона
-      if (state.price.currentMin !== '' && state.price.currentMin < min) {
-        state.price.currentMin = min;
-      }
-      if (state.price.currentMax !== '' && state.price.currentMax > max) {
-        state.price.currentMax = max;
-      }
+      state.price.min = state.price.defaultMin;
+      state.price.max = state.price.defaultMax;
+      state.price.currentMin = state.price.defaultMin;
+      state.price.currentMax = state.price.defaultMax;
     },
     setMinPrice(state, action: PayloadAction<number | ''>) {
       state.price.currentMin = action.payload;
@@ -100,10 +87,10 @@ export const filtersSlice = createSlice({
         ...initialState,
         price: {
           ...initialState.price,
-          min: state.price.defaultMin,
-          max: state.price.defaultMax,
           defaultMin: state.price.defaultMin,
           defaultMax: state.price.defaultMax,
+          min: state.price.defaultMin,
+          max: state.price.defaultMax,
           currentMin: state.price.defaultMin,
           currentMax: state.price.defaultMax,
         },
@@ -120,5 +107,4 @@ export const {
   setType,
   setLevel,
   resetFilters,
-  updateFilteredPriceRange,
 } = filtersSlice.actions;
