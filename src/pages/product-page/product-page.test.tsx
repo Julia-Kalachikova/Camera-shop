@@ -8,11 +8,30 @@ import { FeatureModule } from '../../const';
 
 const mockStore = configureStore({
   reducer: {
-    [ FeatureModule.PRODUCT]: () => ({
+    [FeatureModule.PRODUCT]: () => ({
       productDetails: cardMock,
       productLoadingDetails: false,
       productReviews: reviewsMock,
       productLoadingReviews: false,
+    }),
+    filters: () => ({
+      price: {
+        currentMin: '',
+        currentMax: '',
+        defaultMin: 0,
+        defaultMax: 100000,
+      },
+      category: '',
+      types: [],
+      levels: [],
+    }),
+    sorting: () => ({
+      type: 'price',
+      order: 'asc',
+    }),
+    cards: () => ({
+      cards: [],
+      isLoadingCards: false,
     }),
   },
 });

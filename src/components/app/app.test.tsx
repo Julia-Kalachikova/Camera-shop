@@ -10,10 +10,24 @@ import { reviewsMock } from '../../testing-mocks';
 
 describe('App Component', () => {
   it('should render CatalogPage on root route', () => {
-
     const mockStore = configureStore({
       reducer: {
         [FeatureModule.CARDS]: () => ({ cards: [], isLoadingCards: false }),
+        filters: () => ({
+          price: {
+            currentMin: '',
+            currentMax: '',
+            defaultMin: 0,
+            defaultMax: 100000,
+          },
+          category: '',
+          types: [],
+          levels: [],
+        }),
+        sorting: () => ({
+          type: 'price',
+          order: 'asc',
+        }),
       },
     });
 

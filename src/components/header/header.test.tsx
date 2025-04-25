@@ -1,12 +1,30 @@
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './header';
+import { Provider } from 'react-redux';
+import { FeatureModule } from '../../const';
+import { configureStore } from '@reduxjs/toolkit';
 
 
 describe('Header Component', () => {
   it('should render correctly', () => {
-    render(<Header />, {wrapper: BrowserRouter});
+    const mockStore = configureStore({
+      reducer: {
+        [FeatureModule.CARDS]: () => ({
+          cards: [], // или [] — главное, чтобы cards существовал
+          isLoadingCards: false
+        }),
+      },
+    });
+
+    render(
+      <Provider store={mockStore}>
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      </Provider>
+    );
 
     const headerElement = screen.getByTestId('header');
     expect(headerElement).toBeInTheDocument();
