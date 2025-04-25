@@ -13,7 +13,7 @@ export default function Filters(): JSX.Element {
   // При загрузке устанавливаем диапазон цен
   useEffect(() => {
     if (productCards.length > 0) {
-      const prices = productCards.map(p => p.price);
+      const prices = productCards.map((product) => product.price);
       dispatch(setPriceRange({
         min: Math.min(...prices),
         max: Math.max(...prices),
