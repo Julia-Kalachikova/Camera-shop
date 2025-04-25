@@ -8,7 +8,7 @@ type FilterCheckboxItemProps = {
 
 export default function FilterCheckboxItem({ type, checked, onChange, disabled = false, label }: FilterCheckboxItemProps): JSX.Element {
   return (
-    <div className="custom-checkbox catalog-filter__item">
+    <div className="custom-checkbox catalog-filter__item" >
       <label>
         <input
           type="checkbox"
