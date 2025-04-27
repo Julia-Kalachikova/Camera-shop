@@ -68,7 +68,7 @@ describe('productDetailsSlice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('hould set productReviews and productLoadingReviews to false with "getProductReviews.fulfilled"', () => {
+  it('should set productReviews and productLoadingReviews to false with "getProductReviews.fulfilled"', () => {
     const mockData: ReviewType[] = reviewsMock;
     const expectedState = {
       productDetails: null,

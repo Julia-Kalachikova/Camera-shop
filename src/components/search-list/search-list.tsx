@@ -34,6 +34,7 @@ export default function SearchList({
   return (
     <ul
       className="form-search__select-list scroller"
+      data-testid='search-list'
       ref={dropdownRef}
       role="listbox"
     >

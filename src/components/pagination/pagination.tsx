@@ -77,7 +77,7 @@ export default function Pagination({ totalProducts }: PaginationProps): JSX.Elem
   };
 
   return (
-    <div className="pagination">
+    <div className="pagination" data-testid='pagination'>
       <ul className="pagination__list">
         {renderPageItems()}
       </ul>
