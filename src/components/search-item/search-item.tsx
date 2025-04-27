@@ -25,6 +25,7 @@ export default function SearchItem({ product, isSelected, onSelect, onHover }: P
   return (
     <li
       className="form-search__select-item"
+      data-testid='search-item'
       style={{backgroundColor: isSelected ? '#f4f4fc' : 'transparent',}}
       tabIndex={0}
       onClick={handleClick}

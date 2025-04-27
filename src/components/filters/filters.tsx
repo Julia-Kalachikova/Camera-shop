@@ -13,7 +13,7 @@ export default function Filters(): JSX.Element {
   // При загрузке устанавливаем диапазон цен
   useEffect(() => {
     if (productCards.length > 0) {
-      const prices = productCards.map(p => p.price);
+      const prices = productCards.map((product) => product.price);
       dispatch(setPriceRange({
         min: Math.min(...prices),
         max: Math.max(...prices),
@@ -69,7 +69,7 @@ export default function Filters(): JSX.Element {
   };
 
   return (
-    <div className="catalog-filter">
+    <div className="catalog-filter" data-testid='filters'>
       <form action="#">
         <h2 className="visually-hidden">Фильтр</h2>
         <fieldset className="catalog-filter__block">
