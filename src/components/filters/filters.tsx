@@ -4,11 +4,14 @@ import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { StateType } from '../../store/store-types';
 import { resetFilters, setCategory, setLevel, setMaxPrice, setMinPrice, setPriceRange, setType } from '../../store/slice/filters-slice';
 import FilterCheckboxItem from '../filter-checkbox-item/filter-checkbox-item';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Filters(): JSX.Element {
   const dispatch = useAppDispatch();
   const filters = useAppSelector((state: StateType) => state.filters);
   const productCards = useAppSelector(selectCards);
+  const [searchParams, setSearchParams] = useSearchParams();
+
 
   // При загрузке устанавливаем диапазон цен
   useEffect(() => {
@@ -66,6 +69,10 @@ export default function Filters(): JSX.Element {
 
   const handleResetFilters = () => {
     dispatch(resetFilters());
+
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete('page');
+    setSearchParams(newParams);
   };
 
   return (

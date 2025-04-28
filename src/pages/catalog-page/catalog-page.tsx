@@ -55,8 +55,8 @@ export default function CatalogPage(): JSX.Element {
                 </div>
                 <div className="catalog__content">
                   <Sorting />
-                  <ProductCardList productCards={productCards} />
-                  {/* <Pagination totalProducts = {productCards.length}/> */}
+                  <ProductCardList productCards={paginatedProducts} />
+                  <Pagination totalProducts = {productCards.length}/>
                 </div>
               </div>
             </div>
