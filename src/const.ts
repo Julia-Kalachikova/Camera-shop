@@ -23,6 +23,3 @@ export enum APIRoutes {
   Cards = '/cameras',
   Orders = '/orders'
 }
-
-export const PRODUCTS_PER_PAGE = 9;
-export const VISIBLE_PAGES = 3;
