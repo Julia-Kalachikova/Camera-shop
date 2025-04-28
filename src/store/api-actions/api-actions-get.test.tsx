@@ -1,34 +1,38 @@
-import { Action, configureStore, Middleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { APIRoutes, FeatureModule } from '../../const';
 import { getCardsAction, getProductDetailsByID, getProductReviews } from './api-actions';
 import { cardsSlice } from '../slice/catalog-slice';
 import { cardMock, cardsMocks, reviewsMock } from '../../testing-mocks';
-import { StateType } from '../store-types';
 import { productDetailsSlice } from '../slice/product-details-slice';
 import { ProductCardType, ReviewType } from '../../types';
+import { filtersSlice } from '../slice/filters-slice';
+import { sortingSlice } from '../slice/sorting-slice';
 
 
 const mockAxios = new MockAdapter(axios);
-type AppAction = Action<string>;
-type AppMiddleware = Middleware<NonNullable<unknown>, StateType>;
+function createTestStore() {
+  return configureStore({
+    reducer: {
+      [FeatureModule.CARDS]: cardsSlice.reducer,
+      [FeatureModule.PRODUCT]: productDetailsSlice.reducer,
+      [FeatureModule.FILTERS]: filtersSlice.reducer,
+      [FeatureModule.SORTING]: sortingSlice.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        thunk: {
+          extraArgument: axios,
+        },
+      }),
+  });
+}
 describe('Async actions', () => {
-  let store: ReturnType<typeof configureStore<StateType, AppAction, AppMiddleware[]>>;
+  let store: ReturnType<typeof createTestStore>;
 
   beforeEach(() => {
-    store = configureStore<StateType, AppAction, AppMiddleware[]>({
-      reducer: {
-        [FeatureModule.CARDS]: cardsSlice.reducer,
-        [FeatureModule.PRODUCT]: productDetailsSlice.reducer,
-      },
-      middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-          thunk: {
-            extraArgument: axios,
-          },
-        }),
-    });
+    store = createTestStore();
   });
 
   it('should set isLoadingCards to true on pending', () => {
@@ -76,7 +80,7 @@ describe('Async actions', () => {
     const mockData: ProductCardType = cardMock;
     mockAxios.onGet(`${APIRoutes.Cards}/1`).reply(200, mockData);
 
-    await store.dispatch(getProductDetailsByID({ cardId: 1 }));
+    await store.dispatch(getProductDetailsByID({ cardId: '1' }));
 
     const state = store.getState()[FeatureModule.PRODUCT];
     expect(state.productLoadingDetails).toBe(false);
@@ -87,7 +91,7 @@ describe('Async actions', () => {
 
     mockAxios.onGet(`${APIRoutes.Cards}/1`).reply(500);
 
-    await store.dispatch(getProductDetailsByID({ cardId: 1 }));
+    await store.dispatch(getProductDetailsByID({ cardId: '1' }));
 
     const state = store.getState()[FeatureModule.PRODUCT];
     expect(state.productLoadingDetails).toBe(false);
@@ -109,7 +113,7 @@ describe('Async actions', () => {
     mockAxios.onGet(`${APIRoutes.Cards}/1/reviews`).reply(200, mockData);
 
 
-    await store.dispatch(getProductReviews({ cardId: 1 }));
+    await store.dispatch(getProductReviews({ cardId: '1' }));
 
 
     const state = store.getState()[FeatureModule.PRODUCT];
@@ -122,7 +126,7 @@ describe('Async actions', () => {
     mockAxios.onGet(`${APIRoutes.Cards}/1/reviews`).reply(500);
 
 
-    await store.dispatch(getProductReviews({ cardId: 1 }));
+    await store.dispatch(getProductReviews({ cardId: '1' }));
 
     const state = store.getState()[FeatureModule.PRODUCT];
     expect(state.productLoadingReviews).toBe(false);

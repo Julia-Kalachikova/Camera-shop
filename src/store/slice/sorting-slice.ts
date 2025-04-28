@@ -24,9 +24,9 @@ export const sortingSlice = createSlice ({
   initialState,
   reducers: {
     setSortType: (state, action: PayloadAction<SortType>) => {
-      // Сохраняем текущий порядок для предыдущего типа
+
       state.lastOrder[state.type] = state.order;
-      // Устанавливаем новый тип и восстанавливаем его последний порядок
+
       state.type = action.payload;
     },
     setSortOrder: (state, action: PayloadAction<SortOrder>) => {

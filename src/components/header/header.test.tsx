@@ -12,7 +12,7 @@ describe('Header Component', () => {
     const mockStore = configureStore({
       reducer: {
         [FeatureModule.CARDS]: () => ({
-          cards: [], // или [] — главное, чтобы cards существовал
+          cards: [],
           isLoadingCards: false
         }),
       },

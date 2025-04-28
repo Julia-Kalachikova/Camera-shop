@@ -27,7 +27,7 @@ export const selectFilteredCards = (state: StateType): ProductCardType[] => {
   const maxPrice = price.currentMax === '' ? price.defaultMax : price.currentMax;
 
   return cards.filter((card: ProductCardType) => {
-    // Если задали одинаковый exact-диапазон, показываем только товары с этой ценой:
+
     if (
       price.currentMin !== '' &&
       price.currentMax !== '' &&
@@ -37,17 +37,14 @@ export const selectFilteredCards = (state: StateType): ProductCardType[] => {
       return false;
     }
 
-    // Фильтрация по цене
     if (card.price < minPrice || card.price > maxPrice) {
       return false;
     }
 
-    // Фильтрация по категории
     if (category && card.category !== category) {
       return false;
     }
 
-    // Фильтрация по типу
     const activeTypes = (Object.entries(types) as [CameraType, boolean][])
       .filter(([, isActive]) => isActive)
       .map(([type]) => type);
@@ -56,7 +53,6 @@ export const selectFilteredCards = (state: StateType): ProductCardType[] => {
       return false;
     }
 
-    // Фильтрация по уровню
     const activeLevels = (Object.entries(levels) as [CameraLevel, boolean][])
       .filter(([, isActive]) => isActive)
       .map(([level]) => level);

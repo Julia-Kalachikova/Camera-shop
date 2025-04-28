@@ -1,33 +1,27 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { APIRoutes, RoutePath } from '../../const';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+
+import { APIRoutes, RoutePath } from '../../const';
 import { ProductCardType } from '../../types';
 import { useAppSelector } from '../../store/store-hooks';
 import { selectCards } from '../../store/selectors/selectors';
-// import './style.css';
 import SearchList from '../search-list/search-list';
 
+
 export default function Header(): JSX.Element {
-  const cards = useAppSelector(selectCards); //получаем карточки из стора
-  const [searchQuery, setSearchQuery] = useState(''); //заводим состояние для текста в поле поиска
+  const cards = useAppSelector(selectCards);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const [results, setResults] = useState<ProductCardType[]>([]);//найденные товары
+  const [results, setResults] = useState<ProductCardType[]>([]);
 
-  const [selectedIndex, setSelectedIndex] = useState(-1);//выбранный элемент списка
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);//открыт ли выпадающий список
-  const navigate = useNavigate();//переход на страницу товара
-  // searchQuery — хранит то, что пользователь ввёл в поиск.
-  // results — массив найденных товаров.
-  // selectedIndex — индекс выбранного товара (для навигации стрелками).
-  // isDropdownOpen — открыт ли список подсказок.
-  // navigate — помогает перейти на страницу товара.
-  // useRef — нужен для управления фокусом и DOM-элементами.
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const dropdownRef = useRef<HTMLUListElement>(null);//Ссылка на список результатов
+  const dropdownRef = useRef<HTMLUListElement>(null);
 
-  const inputRef = useRef<HTMLInputElement>(null);// Ссылка на поле ввода
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Единая функция поиска с useCallback
   const searchProducts = useCallback((query: string): ProductCardType[] => {
     if (!query || query.length < 3 || !cards.length) {
       return [];
@@ -38,11 +32,11 @@ export default function Header(): JSX.Element {
   }, [cards]);
 
   useEffect(() => {
-    // Задержка перед поиском (чтобы не делать запрос на каждый символ)
+
     const timer = setTimeout(() => {
-      const foundProducts = searchProducts(searchQuery); // Ищем товары
-      setResults(foundProducts); // Сохраняем результаты
-      setIsDropdownOpen(foundProducts.length > 0); // Показываем список, если есть результаты
+      const foundProducts = searchProducts(searchQuery);
+      setResults(foundProducts);
+      setIsDropdownOpen(foundProducts.length > 0);
     }, 300);
 
     return () => clearTimeout(timer);
@@ -63,20 +57,20 @@ export default function Header(): JSX.Element {
 
 
   const handleSelect = (product: ProductCardType) => {
-    // console.log('Navigating to:', `${APIRoutes.Cards}/${product.id}`);
-    navigate(`${APIRoutes.Cards}/${product.id}`);// Переходим на страницу товара
-    setSearchQuery('');// Очищаем поиск
-    setIsDropdownOpen(false);// Закрываем список
+
+    navigate(`${APIRoutes.Cards}/${product.id}`);
+    setSearchQuery('');
+    setIsDropdownOpen(false);
   };
 
-  const handleKeyDown = (evt: React.KeyboardEvent) => { // Если нет результатов — ничего не делаем
+  const handleKeyDown = (evt: React.KeyboardEvent) => {
     if (!results.length || !isDropdownOpen) {
       return;
     }
     const scrollToItem = (index: number) => {
       if (dropdownRef.current) {
-        const itemHeight = 44; // Примерная высота одного элемента (подберите под ваш CSS)
-        const visibleItems = 4; // Количество видимых элементов
+        const itemHeight = 44;
+        const visibleItems = 4;
         const scrollPosition = index * itemHeight - (visibleItems - 1) * itemHeight / 2;
 
         dropdownRef.current.scrollTo({
@@ -92,7 +86,7 @@ export default function Header(): JSX.Element {
         setSelectedIndex((prev) => {
           const newIndex = prev + 1;
           const finalIndex = newIndex >= results.length ? 0 : newIndex;
-          scrollToItem(finalIndex); // Прокрутка к элементу
+          scrollToItem(finalIndex);
           return finalIndex;
         });
         break;
@@ -102,7 +96,7 @@ export default function Header(): JSX.Element {
         setSelectedIndex((prev) => {
           const newIndex = prev - 1;
           const finalIndex = newIndex < 0 ? results.length - 1 : newIndex;
-          scrollToItem(finalIndex); // Прокрутка к элементу
+          scrollToItem(finalIndex);
           return finalIndex;
         });
         break;
@@ -126,12 +120,12 @@ export default function Header(): JSX.Element {
       }
       case 'Enter':
         if (selectedIndex >= 0) {
-          handleSelect(results[selectedIndex]);// Переходим на страницу товара
+          handleSelect(results[selectedIndex]);
         }
         break;
       case 'Escape':
         setIsDropdownOpen(false);
-        inputRef.current?.focus();// Закрываем список
+        inputRef.current?.focus();
         break;
       default:
         break;
@@ -139,9 +133,9 @@ export default function Header(): JSX.Element {
   };
 
   const handleReset = () => {
-    setSearchQuery('');// Очищаем поле
-    setResults([]);// Очищаем результаты
-    setIsDropdownOpen(false);// Закрываем список
+    setSearchQuery('');
+    setResults([]);
+    setIsDropdownOpen(false);
     inputRef.current?.focus();
   };
 
@@ -221,11 +215,6 @@ export default function Header(): JSX.Element {
           )}
 
         </div>
-        {/* <Link className='header__basket-link' to='#'>
-          <svg width='16' height='16' aria-hidden='true'>
-            <use xlinkHref='#icon-basket'></use>
-          </svg>
-        </Link> */}
       </div>
     </header>
   );

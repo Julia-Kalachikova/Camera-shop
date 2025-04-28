@@ -31,7 +31,6 @@ export default function ReviewList({ reviews }: Props): JSX.Element {
       <div className='container'>
         <div className='page-content__headed'>
           <h2 className='title title--h3'>Отзывы</h2>
-          {/* <!--<button className='btn' type='button'>Оставить свой отзыв</button>--> */}
         </div>
         <ul className='review-block__list'>
           {visibleReviews.map((review) => <Review key={review.id} reviewTitle={review} />)}

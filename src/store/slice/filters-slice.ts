@@ -48,7 +48,7 @@ export const filtersSlice = createSlice({
   reducers: {
     setPriceRange(state, action: PayloadAction<{min: number; max: number}>) {
       const { min, max } = action.payload;
-      // Устанавливаем дефолтные, если они ещё не заданы
+
       if (state.price.defaultMin === 0 && state.price.defaultMax === 0) {
         state.price.defaultMin = min;
         state.price.defaultMax = max;

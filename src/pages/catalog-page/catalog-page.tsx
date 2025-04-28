@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ProductCardList from '../../components/product-card-list/product-card-list';
@@ -6,19 +6,12 @@ import { useAppSelector } from '../../store/store-hooks';
 import { selectProcessedCards } from '../../store/selectors/selectors';
 import Filters from '../../components/filters/filters';
 import Sorting from '../../components/sorting/sorting';
-import Pagination from '../../components/pagination/pagination';
-import { PRODUCTS_PER_PAGE } from '../../const';
 
 
 export default function CatalogPage(): JSX.Element {
-  const [searchParams] = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
+
   const productCards = useAppSelector(selectProcessedCards);
 
-  const paginatedProducts = productCards.slice(
-    (currentPage - 1) * PRODUCTS_PER_PAGE,
-    currentPage * PRODUCTS_PER_PAGE
-  );
   return (
     <div className="wrapper" data-testid='catalog'>
       <Header />
@@ -56,7 +49,6 @@ export default function CatalogPage(): JSX.Element {
                 <div className="catalog__content">
                   <Sorting />
                   <ProductCardList productCards={productCards} />
-                  {/* <Pagination totalProducts = {productCards.length}/> */}
                 </div>
               </div>
             </div>

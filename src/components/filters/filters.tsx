@@ -10,7 +10,6 @@ export default function Filters(): JSX.Element {
   const filters = useAppSelector((state: StateType) => state.filters);
   const productCards = useAppSelector(selectCards);
 
-  // При загрузке устанавливаем диапазон цен
   useEffect(() => {
     if (productCards.length > 0) {
       const prices = productCards.map((product) => product.price);
@@ -33,12 +32,11 @@ export default function Filters(): JSX.Element {
   };
 
   const handleMinPriceBlur = () => {
-    // берем введённое или default
+
     let value = filters.price.currentMin === ''
       ? filters.price.defaultMin
       : filters.price.currentMin;
 
-    // корректируем по границам
     if (value < filters.price.defaultMin) {
       value = filters.price.defaultMin;
     }

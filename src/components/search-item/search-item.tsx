@@ -13,12 +13,12 @@ export default function SearchItem({ product, isSelected, onSelect, onHover }: P
   const handleKeyDown = (evt: KeyboardEvent<HTMLLIElement>) => {
     if (evt.key === 'Enter') {
       evt.preventDefault();
-      onSelect(); // Вызываем onSelect напрямую
+      onSelect();
     }
   };
 
   const handleClick = (evt: MouseEvent<HTMLLIElement>) => {
-    evt.preventDefault(); // Предотвращаем стандартное поведение
+    evt.preventDefault();
     onSelect();
   };
 

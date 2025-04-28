@@ -1,34 +1,36 @@
-import { Action, configureStore, Middleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { APIRoutes, FeatureModule } from '../../const';
 import { sendCallRequest } from './api-actions';
 import { cardsSlice } from '../slice/catalog-slice';
 import { CallRequestType } from '../../types';
-import { StateType } from '../store-types';
 import { productDetailsSlice } from '../slice/product-details-slice';
+import { filtersSlice } from '../slice/filters-slice';
+import { sortingSlice } from '../slice/sorting-slice';
 
 
 const mockAxios = new MockAdapter(axios);
-type AppAction = Action<string>;
-type AppMiddleware = Middleware<NonNullable<unknown>, StateType>;
-
+function createTestStore() {
+  return configureStore({
+    reducer: {
+      [FeatureModule.CARDS]: cardsSlice.reducer,
+      [FeatureModule.PRODUCT]: productDetailsSlice.reducer,
+      [FeatureModule.FILTERS]: filtersSlice.reducer,
+      [FeatureModule.SORTING]: sortingSlice.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        thunk: {
+          extraArgument: axios,
+        },
+      }),
+  });
+}
 describe('Async action: sendCallRequest', () => {
-  let store: ReturnType<typeof configureStore<StateType, AppAction, AppMiddleware[]>>;
+  let store: ReturnType<typeof createTestStore>;
   beforeEach(() => {
-
-    store = configureStore<StateType, AppAction, AppMiddleware[]>({
-      reducer: {
-        [FeatureModule.CARDS]: cardsSlice.reducer,
-        [FeatureModule.PRODUCT]: productDetailsSlice.reducer,
-      },
-      middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-          thunk: {
-            extraArgument: axios,
-          },
-        }),
-    });
+    store = createTestStore();
   });
 
   afterEach(() => {
@@ -94,8 +96,7 @@ describe('Async action: sendCallRequest', () => {
 
     await store.dispatch(sendCallRequest(requestData));
 
-    // Проверяем что запрос был сделан с правильными данными
     expect(mockAxios.history.post[0].url).toBe(APIRoutes.Orders);
-    expect(JSON.parse(mockAxios.history.post[0].data)).toEqual(requestData);
+    expect(JSON.parse(mockAxios.history.post[0].data as string)).toEqual(requestData);
   });
 });

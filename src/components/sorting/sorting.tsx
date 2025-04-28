@@ -18,7 +18,7 @@ export default function Sorting(): JSX.Element {
 
 
   return (
-    <div className="catalog-sort">
+    <div className="catalog-sort" data-testid='sorting'>
       <form action="#">
         <div className="catalog-sort__inner">
           <p className="title title&#45;&#45;h5">Сортировать:</p>
