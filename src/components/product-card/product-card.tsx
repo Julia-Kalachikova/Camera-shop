@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { ProductCardType } from '../../types';
 import Stars from '../stars/stars';
 import { useState } from 'react';
-import ModalContactForm from '../modal-contact-form/modal-contact-form';
+import ModalAddItem from '../modal-contact-form/modal-add-item';
 
 
 type Props = {
@@ -60,7 +60,7 @@ export default function ProductCard({ card }: Props): JSX.Element {
           Купить
         </button>
         {isModalOpen && (
-          <ModalContactForm
+          <ModalAddItem
             productCard={card}
             onClose={handleCloseModal}
           />

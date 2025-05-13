@@ -1,6 +1,7 @@
 export enum RoutePath {
   Catalog = '/',
   Product = '/cameras/:id',
+  Basket = '/card',
   NOT_FOUND = '/*',
 }
 
@@ -17,6 +18,7 @@ export const FeatureModule = {
   PRODUCT: 'product',
   SORTING: 'sorting',
   FILTERS: 'filters',
+  BASKET: 'basket',
 } as const;
 
 export enum APIRoutes {

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import ModalContactForm from './modal-contact-form';
+import ModalContactForm from './modal-add-item';
 import { BrowserRouter } from 'react-router-dom';
 import { cardMock } from '../../testing-mocks';
 import { Provider } from 'react-redux';
