@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ProductCardType } from '../../types';
 import Stars from '../stars/stars';
-import { useState } from 'react';
-import ModalAddItem from '../modal-contact-form/modal-add-item';
+import ModalButtonAddItem from '../modal-button-add-Item/modal-button-add-item';
 
 
 type Props = {
@@ -12,15 +11,6 @@ type Props = {
 export default function ProductCard({ card }: Props): JSX.Element {
   const { name, type, category, description, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, price, rating, reviewCount } = card;
   const linkTo = `/cameras/${card.id}`;
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleBuyClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
 
   return (
     <div className='product-card' data-testid="card">
@@ -52,19 +42,9 @@ export default function ProductCard({ card }: Props): JSX.Element {
         </p>
       </div>
       <div className='product-card__buttons'>
-        <button
-          className='btn btn--purple product-card__btn'
-          type='button'
-          onClick={handleBuyClick}
-        >
-          Купить
-        </button>
-        {isModalOpen && (
-          <ModalAddItem
-            productCard={card}
-            onClose={handleCloseModal}
-          />
-        )}
+        <ModalButtonAddItem
+          productCard={card}
+        />
         <Link className='btn btn--transparent' to={linkTo}>Подробнее
         </Link>
       </div>
