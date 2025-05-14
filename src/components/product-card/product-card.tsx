@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ProductCardType } from '../../types';
 import Stars from '../stars/stars';
-import ModalButtonAddItem from '../modal-button-add-Item/modal-button-add-item';
+import ButtonAddItem from '../button-add-Item/button-add-item';
 
 
 type Props = {
@@ -42,8 +42,9 @@ export default function ProductCard({ card }: Props): JSX.Element {
         </p>
       </div>
       <div className='product-card__buttons'>
-        <ModalButtonAddItem
+        <ButtonAddItem
           productCard={card}
+          variant='catalog'
         />
         <Link className='btn btn--transparent' to={linkTo}>Подробнее
         </Link>

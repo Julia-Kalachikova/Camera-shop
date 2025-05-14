@@ -106,7 +106,7 @@ export default function ModalAddItemSuccess({ onClose }: Props): JSX.Element {
             </Link>
             <Link
               className="btn btn--purple modal__btn modal__btn--fit-width"
-              to={RoutePath.Basket}
+              to={RoutePath.Cart}
             >Перейти в корзину
             </Link>
           </div>

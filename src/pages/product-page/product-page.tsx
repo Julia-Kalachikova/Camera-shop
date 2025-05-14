@@ -11,6 +11,7 @@ import Specs from '../../components/bloc-info/specs';
 import Description from '../../components/bloc-info/description';
 import Spinner from '../../components/spinner/spinner';
 import ReviewList from '../../components/reviews-list/reviews-list';
+import ButtonAddItem from '../../components/button-add-Item/button-add-item';
 
 export default function ProductPage(): JSX.Element {
   const [activeTab, setActiveTab] = useState<'specs' | 'description'>('description');
@@ -90,14 +91,10 @@ export default function ProductPage(): JSX.Element {
                     <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
                   </div>
                   <p className="product__price"><span className="visually-hidden">Цена:</span>{price.toLocaleString('ru-RU')} ₽</p>
-                  <button
-                    className="btn btn--purple"
-                    type="button"
-                  >
-                    <svg width="24" height="16" aria-hidden="true">
-                      <use xlinkHref="#icon-add-basket"></use>
-                    </svg>Добавить в корзину
-                  </button>
+                  <ButtonAddItem
+                    productCard={productDetails}
+                    variant='productPage'
+                  />
                   <div className="tabs product__tabs">
                     <div className="tabs__controls product__tabs-controls">
                       <button

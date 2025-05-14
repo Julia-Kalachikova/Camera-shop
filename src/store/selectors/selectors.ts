@@ -74,3 +74,8 @@ export const selectProcessedCards = (state: StateType): ProductCardType[] => {
     return order === SortOrder.Asc ? valueA - valueB : valueB - valueA;
   });
 };
+
+export const selectCartItems = (state: StateType) => state.cart.items;
+export const isProductInCart = (id: number) => (state: StateType) => state.cart.items.some((item) => item.id === id);
+export const selectCartTotalCount = (state: StateType) => state.cart.items.reduce((total, item) => total + item.count, 0);
+
