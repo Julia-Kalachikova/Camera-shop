@@ -39,7 +39,7 @@ export default function ButtonAddItem({ productCard, variant }: Props): JSX.Elem
 
   let button;
 
-  if (isInCart) {
+  if (isInCart && variant === 'catalog') {
     button = (
       <Link to={RoutePath.Cart} className="btn btn--purple-border product-card__btn product-card__btn--in-cart">
         В корзине
