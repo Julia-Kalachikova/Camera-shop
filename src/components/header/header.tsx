@@ -4,12 +4,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { APIRoutes, RoutePath } from '../../const';
 import { ProductCardType } from '../../types';
 import { useAppSelector } from '../../store/store-hooks';
-import { selectCards } from '../../store/selectors/selectors';
+import { selectCards, selectCartTotalCount } from '../../store/selectors/selectors';
 import SearchList from '../search-list/search-list';
 
 
 export default function Header(): JSX.Element {
   const cards = useAppSelector(selectCards);
+  const cartTotalCount = useAppSelector(selectCartTotalCount);
   const [searchQuery, setSearchQuery] = useState('');
 
   const [results, setResults] = useState<ProductCardType[]>([]);
@@ -215,6 +216,14 @@ export default function Header(): JSX.Element {
           )}
 
         </div>
+        <Link className="header__basket-link" to={RoutePath.Cart}>
+          <svg width="16" height="16" aria-hidden="true">
+            <use xlinkHref="#icon-basket"></use>
+          </svg>
+          <span className="header__basket-count">
+            {cartTotalCount}
+          </span>
+        </Link>
       </div>
     </header>
   );

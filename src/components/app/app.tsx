@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { getCardsAction } from '../../store/api-actions/api-actions';
 import Spinner from '../spinner/spinner';
 import { selectIsLoadingCards } from '../../store/selectors/selectors';
+import CartPage from '../../pages/cart-page/cart-page';
 
 
 export default function App(): JSX.Element {
@@ -39,6 +40,10 @@ export default function App(): JSX.Element {
         <Route
           path={RoutePath.NOT_FOUND}
           element={<NotFoundPage />}
+        />
+        <Route
+          path={RoutePath.Cart}
+          element={<CartPage />}
         />
       </Routes>
     </>
