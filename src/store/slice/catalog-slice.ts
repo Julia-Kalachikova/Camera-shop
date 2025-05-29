@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FeatureModule } from '../../const';
 
-import { ProductCardType } from '../../types';
-import { getCardsAction, sendCallRequest } from '../api-actions/api-actions';
+import { ProductCardPromoType, ProductCardType } from '../../types';
+import { getCardsAction, getCardsPromoAction, sendCallRequest } from '../api-actions/api-actions';
 
 export type CardsSliceType = {
   cards: ProductCardType[];
+  promo: ProductCardPromoType[];
   isLoadingCards: boolean;
   isSendingRequest: boolean;
   requestError: string | null;
@@ -13,6 +14,7 @@ export type CardsSliceType = {
 
 const initialState: CardsSliceType = {
   cards: [],
+  promo: [],
   isLoadingCards: true,
   isSendingRequest: false,
   requestError: null,
@@ -34,6 +36,9 @@ export const cardsSlice = createSlice({
       .addCase(getCardsAction.fulfilled, (state, { payload }: PayloadAction<ProductCardType[]>) => {
         state.cards = payload;
         state.isLoadingCards = false;
+      })
+      .addCase(getCardsPromoAction.fulfilled, (state, { payload }: PayloadAction<ProductCardPromoType[]>) => {
+        state.promo = payload;
       })
       .addCase(getCardsAction.rejected, (state) => {
         state.isLoadingCards = false;
