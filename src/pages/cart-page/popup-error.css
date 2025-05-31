@@ -9,10 +9,6 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-.popup--success {
-  background-color: #4caf50; /* зелёный */
-}
-
 .popup--error {
   background-color: #f44336; /* красный */
 }

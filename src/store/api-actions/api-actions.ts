@@ -65,18 +65,6 @@ export const getProductReviews = createAsyncThunk<
   }
 );
 
-// export const sendCallRequest = createAsyncThunk<void, CallRequestType,
-// {
-//   dispatch: typeof store.dispatch;
-//   state: StateType;
-//   extra: AxiosInstance;
-// }>(
-//   'cards/sendCallRequest',
-//   async (requestData, { extra: api }) => {
-//     await api.post(APIRoutes.Orders, requestData);
-//   }
-// );
-
 export const sendOrderAction = createAsyncThunk<void, ProductOrderType,
 {
   dispatch: typeof store.dispatch;
@@ -85,8 +73,6 @@ export const sendOrderAction = createAsyncThunk<void, ProductOrderType,
 }>(
   'cards/sendOrder',
   async (order, { extra: api }) => {
-    console.log('>>>> Sending order to server', order);
     await api.post(APIRoutes.Orders, order);
-    console.log('<<<< Server responded:', Response);
   }
 );

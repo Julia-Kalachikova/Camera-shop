@@ -27,6 +27,10 @@ export default function CartPage(): JSX.Element {
     dispatch(getCardsPromoAction());
   }, [dispatch]);
 
+  const handleCloseModal = () => {
+    setIsOrderSuccessModalOpen(false);
+  };
+
 
   const handleOrderSubmit = async () => {
     if (cartItems.length === 0) {
@@ -39,7 +43,7 @@ export default function CartPage(): JSX.Element {
 
     const order = {
       camerasIds,
-      coupon: ''
+      coupon: null,
     };
 
     try {
@@ -47,7 +51,6 @@ export default function CartPage(): JSX.Element {
       setIsOrderSuccessModalOpen(true);
     } catch (error) {
       setOrderError(errorMessage);
-      // автоматически скрыть через 5 секунд
       setTimeout(() => setOrderError(null), 5000);
     }
   };
@@ -130,7 +133,7 @@ export default function CartPage(): JSX.Element {
                   >Оформить заказ
                   </button>
                   {/* Модалка успеха */}
-                  {isOrderSuccessModalOpen && <ModalBasketSuccess />}
+                  {isOrderSuccessModalOpen && <ModalBasketSuccess onClose={handleCloseModal} />}
                   {/* Попап ошибки */}
                   {orderError && (
                     <div className="popup popup--error">

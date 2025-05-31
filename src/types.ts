@@ -18,11 +18,11 @@ export type ProductCardType = {
   previewImgWebp2x: string;
 };
 
+
 export type ProductOrderType = {
   camerasIds: number[];
-  coupon?: string;
+  coupon?: string | null;
 }
-
 
 export type ProductCardPromoType = {
   id: number;
