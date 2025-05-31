@@ -78,6 +78,8 @@ export const selectProcessedCards = (state: StateType): ProductCardType[] => {
 };
 
 export const selectCartItems = (state: StateType) => state.cart.items;
+export const selectOrderError = (state: StateType) => state.cart.orderError;
+export const selectIsSendingOrder = (state: StateType) => state.cart.isSendingOrder;
 export const isProductInCart = (id: number) => (state: StateType) => state.cart.items.some((item) => item.id === id);
 export const selectCartTotalCount = (state: StateType) => state.cart.items.reduce((total, item) => total + item.count, 0);
 export const selectCartTotalPrice = (state: StateType) => state.cart.items.reduce((total, item) => total + item.price * item.count, 0);

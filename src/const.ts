@@ -29,3 +29,5 @@ export enum APIRoutes {
 }
 
 export type VariantButtonAddItem = 'catalog' | 'productPage';
+
+export const errorMessage = 'Ошибка при оформлении заказа. Попробуйте ещё раз.';

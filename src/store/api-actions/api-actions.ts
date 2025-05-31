@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import { APIRoutes } from '../../const';
 import { StateType } from '../store-types';
 import { store } from '../index-store';
-import { CallRequestType, ProductCardPromoType, ProductCardType, ReviewType } from '../../types';
+import { ProductCardPromoType, ProductCardType, ProductOrderType, ReviewType } from '../../types';
 
 
 export const getCardsAction = createAsyncThunk<ProductCardType[],
@@ -65,27 +65,28 @@ export const getProductReviews = createAsyncThunk<
   }
 );
 
-export const sendCallRequest = createAsyncThunk<void, CallRequestType,
-{
-  dispatch: typeof store.dispatch;
-  state: StateType;
-  extra: AxiosInstance;
-}>(
-  'cards/sendCallRequest',
-  async (requestData, { extra: api }) => {
-    await api.post(APIRoutes.Orders, requestData);
-  }
-);
+// export const sendCallRequest = createAsyncThunk<void, CallRequestType,
+// {
+//   dispatch: typeof store.dispatch;
+//   state: StateType;
+//   extra: AxiosInstance;
+// }>(
+//   'cards/sendCallRequest',
+//   async (requestData, { extra: api }) => {
+//     await api.post(APIRoutes.Orders, requestData);
+//   }
+// );
 
-export const sendOrderAction = createAsyncThunk<void, ProductCardType[],
+export const sendOrderAction = createAsyncThunk<void, ProductOrderType,
 {
   dispatch: typeof store.dispatch;
   state: StateType;
   extra: AxiosInstance;
 }>(
   'cards/sendOrder',
-  async (items, { extra: api }) => {
-    await api.post(APIRoutes.Orders, items);
+  async (order, { extra: api }) => {
+    console.log('>>>> Sending order to server', order);
+    await api.post(APIRoutes.Orders, order);
+    console.log('<<<< Server responded:', Response);
   }
 );
-

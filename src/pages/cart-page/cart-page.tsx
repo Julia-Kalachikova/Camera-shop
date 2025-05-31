@@ -3,22 +3,57 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import CartList from '../../components/cart-list/cart-list';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
-import { selectCartFinalPrice, selectCartTotalCount, selectCartTotalPrice, selectDiscountAmount } from '../../store/selectors/selectors';
-import { useEffect } from 'react';
-import { getCardsPromoAction } from '../../store/api-actions/api-actions';
+import { selectCartFinalPrice, selectCartItems, selectCartTotalCount, selectCartTotalPrice, selectDiscountAmount, selectIsSendingOrder } from '../../store/selectors/selectors';
+import { useEffect, useState } from 'react';
+import { getCardsPromoAction, sendOrderAction } from '../../store/api-actions/api-actions';
+import { errorMessage } from '../../const';
+import ModalBasketSuccess from '../../components/modal-basket-success/modal-basket-success';
+import Spinner from '../../components/spinner/spinner';
+import './popup-error.css';
 
 export default function CartPage(): JSX.Element {
   const cartTotalPrice = useAppSelector(selectCartTotalPrice);
   const cartTotalCount = useAppSelector(selectCartTotalCount);
+  const cartItems = useAppSelector(selectCartItems);
+  const isSendingOrder = useAppSelector(selectIsSendingOrder);
   const discount = useAppSelector(selectDiscountAmount);
   const finalPrice = useAppSelector(selectCartFinalPrice);
   const dispatch = useAppDispatch();
+
+  const [isOrderSuccessModalOpen, setIsOrderSuccessModalOpen] = useState(false);
+  const [orderError, setOrderError] = useState<string | null>(null);
 
   useEffect(() => {
     dispatch(getCardsPromoAction());
   }, [dispatch]);
 
 
+  const handleOrderSubmit = async () => {
+    if (cartItems.length === 0) {
+      return;
+    }
+
+    const camerasIds: number[] = cartItems.flatMap((item) =>
+      Array<number>(item.count).fill(item.id)
+    );
+
+    const order = {
+      camerasIds,
+      coupon: ''
+    };
+
+    try {
+      await dispatch(sendOrderAction(order)).unwrap();
+      setIsOrderSuccessModalOpen(true);
+    } catch (error) {
+      setOrderError(errorMessage);
+      // автоматически скрыть через 5 секунд
+      setTimeout(() => setOrderError(null), 5000);
+    }
+  };
+  if (isSendingOrder) {
+    return <Spinner />;
+  }
   return (
     <div className="wrapper">
       <Header />
@@ -74,7 +109,7 @@ export default function CartPage(): JSX.Element {
                   </p>
                   <p className="basket__summary-item">
                     <span className="basket__summary-text">Скидка:</span>
-                    <span className= {discount > 0
+                    <span className={discount > 0
                       ? 'basket__summary-value basket__summary-value--bonus'
                       : 'basket__summary-value'}
                     >
@@ -89,8 +124,19 @@ export default function CartPage(): JSX.Element {
                     className="btn btn--purple"
                     type="submit"
                     disabled={cartTotalCount === 0}
+                    onClick={() => {
+                      void handleOrderSubmit();
+                    }}
                   >Оформить заказ
                   </button>
+                  {/* Модалка успеха */}
+                  {isOrderSuccessModalOpen && <ModalBasketSuccess />}
+                  {/* Попап ошибки */}
+                  {orderError && (
+                    <div className="popup popup--error">
+                      <p>{orderError}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

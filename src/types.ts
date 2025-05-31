@@ -18,6 +18,12 @@ export type ProductCardType = {
   previewImgWebp2x: string;
 };
 
+export type ProductOrderType = {
+  camerasIds: number[];
+  coupon?: string;
+}
+
+
 export type ProductCardPromoType = {
   id: number;
   name: string;
@@ -39,11 +45,11 @@ export type ReviewType = {
 };
 
 
-export type CallRequestType = {
-  camerasIds: [number];
-  coupon: null;
-  tel: string;
-};
+// export type CallRequestType = {
+//   camerasIds: [number];
+//   coupon: null;
+//   tel: string;
+// };
 
 export enum SortType {
   Price = 'price',
