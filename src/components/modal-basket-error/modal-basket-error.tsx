@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../const';
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 export default function ModalBasketError({ onClose }: Props): JSX.Element {
 
   const firstBtnRef = useRef<HTMLButtonElement>(null);
-
+  const navigate = useNavigate();
   const modalRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
@@ -44,6 +45,11 @@ export default function ModalBasketError({ onClose }: Props): JSX.Element {
     }
   };
 
+  const handleCloseRedirect = () => {
+    onClose();
+    navigate(RoutePath.Catalog);
+  };
+
   const handleClose = () => {
     onClose();
   };
@@ -64,6 +70,12 @@ export default function ModalBasketError({ onClose }: Props): JSX.Element {
               onClick={handleClose}
               type="button"
             >Вернуться в корзину
+            </button>
+            <button
+              className="btn btn--purple modal__btn modal__btn--fit-width"
+              onClick={handleCloseRedirect}
+              type="button"
+            >Вернуться к покупкам
             </button>
           </div>
           <button
