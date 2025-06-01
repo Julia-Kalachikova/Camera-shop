@@ -88,8 +88,8 @@ export default function CartList(): JSX.Element {
                 type="number"
                 id={`counter-${item.id}`}
                 value={item.count}
-                min="1"
-                max="99"
+                min={1}
+                max={9}
                 onChange={(e) => handleSetCount(item.id, e.target.value)}
                 aria-label="количество товара"
               />
@@ -97,7 +97,7 @@ export default function CartList(): JSX.Element {
                 className="btn-icon btn-icon--next"
                 aria-label="увеличить количество товара"
                 onClick={() => handleIncrease(item.id)}
-                disabled={item.count >= 99}
+                disabled={item.count >= 9}
               >
                 <svg width="7" height="12" aria-hidden="true">
                   <use xlinkHref="#icon-arrow"></use>

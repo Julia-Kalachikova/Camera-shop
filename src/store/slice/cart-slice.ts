@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductCardType } from '../../types';
 import { FeatureModule } from '../../const';
+import { sendOrderAction } from '../api-actions/api-actions';
 
 function loadCartFromLocalStorage(): CartSliceType | undefined {
   try {
@@ -17,10 +18,13 @@ type CartItem = ProductCardType & {
 
 type CartSliceType = {
   items: CartItem[];
+  isSendingOrder: boolean;
 }
+
 
 const initialState: CartSliceType = loadCartFromLocalStorage() || {
   items: [],
+  isSendingOrder: false,
 };
 
 export const cartSlice = createSlice({
@@ -40,7 +44,7 @@ export const cartSlice = createSlice({
     },
     increaseCount(state, action: PayloadAction<number>) {
       const item = state.items.find((cartItem) => cartItem.id === action.payload);
-      if (item && item.count < 99) {
+      if (item && item.count < 9) {
         item.count += 1;
       }
     },
@@ -53,10 +57,23 @@ export const cartSlice = createSlice({
     setCount(state, action: PayloadAction<{ id: number; count: number}>) {
       const item = state.items.find((cartItem) => cartItem.id === action.payload.id);
       if (item) {
-        const newCount = Math.max(1, Math.min(99, action.payload.count));
+        const newCount = Math.max(1, Math.min(9, action.payload.count));
         item.count = newCount;
       }
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(sendOrderAction.pending, (state) => {
+        state.isSendingOrder = true;
+      })
+      .addCase(sendOrderAction.fulfilled, (state) => {
+        state.isSendingOrder = false;
+        state.items = [];
+      })
+      .addCase(sendOrderAction.rejected, (state) => {
+        state.isSendingOrder = false;
+      });
   }
 });
 

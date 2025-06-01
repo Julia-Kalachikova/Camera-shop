@@ -19,11 +19,13 @@ export const FeatureModule = {
   SORTING: 'sorting',
   FILTERS: 'filters',
   CART: 'cart',
+  PROMO: 'promo'
 } as const;
 
 export enum APIRoutes {
   Cards = '/cameras',
-  Orders = '/orders'
+  Orders = '/orders',
+  Promo ='/promo',
 }
 
 export type VariantButtonAddItem = 'catalog' | 'productPage';
