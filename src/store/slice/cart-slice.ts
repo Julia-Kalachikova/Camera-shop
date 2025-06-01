@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductCardType } from '../../types';
-import { errorMessage, FeatureModule } from '../../const';
+import { FeatureModule } from '../../const';
 import { sendOrderAction } from '../api-actions/api-actions';
 
 function loadCartFromLocalStorage(): CartSliceType | undefined {
@@ -19,14 +19,12 @@ type CartItem = ProductCardType & {
 type CartSliceType = {
   items: CartItem[];
   isSendingOrder: boolean;
-  orderError: string | null;
 }
 
 
 const initialState: CartSliceType = loadCartFromLocalStorage() || {
   items: [],
   isSendingOrder: false,
-  orderError:null,
 };
 
 export const cartSlice = createSlice({
@@ -68,15 +66,13 @@ export const cartSlice = createSlice({
     builder
       .addCase(sendOrderAction.pending, (state) => {
         state.isSendingOrder = true;
-        state.orderError = null;
       })
       .addCase(sendOrderAction.fulfilled, (state) => {
         state.isSendingOrder = false;
         state.items = [];
       })
-      .addCase(sendOrderAction.rejected, (state, action) => {
+      .addCase(sendOrderAction.rejected, (state) => {
         state.isSendingOrder = false;
-        state.orderError = action.error.message || errorMessage;
       });
   }
 });

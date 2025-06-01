@@ -3,13 +3,13 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import CartList from '../../components/cart-list/cart-list';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
-import { selectCartFinalPrice, selectCartItems, selectCartTotalCount, selectCartTotalPrice, selectDiscountAmount, selectIsSendingOrder } from '../../store/selectors/selectors';
+import { selectCartFinalPrice, selectCartItems, selectCartTotalCount, selectCartTotalPrice, selectDiscountAmount, selectIsSendingOrder, selectOrderError } from '../../store/selectors/selectors';
 import { useEffect, useState } from 'react';
 import { getCardsPromoAction, sendOrderAction } from '../../store/api-actions/api-actions';
-import { errorMessage } from '../../const';
+// import { errorMessage } from '../../const';
 import ModalBasketSuccess from '../../components/modal-basket-success/modal-basket-success';
 import Spinner from '../../components/spinner/spinner';
-import './popup-error.css';
+import ModalBasketError from '../../components/modal-basket-error/modal-basket-error';
 
 export default function CartPage(): JSX.Element {
   const cartTotalPrice = useAppSelector(selectCartTotalPrice);
@@ -21,16 +21,18 @@ export default function CartPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [isOrderSuccessModalOpen, setIsOrderSuccessModalOpen] = useState(false);
-  const [orderError, setOrderError] = useState<string | null>(null);
+  const [isOrderErrorModalOpen, setIsOrderErrorModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getCardsPromoAction());
   }, [dispatch]);
 
-  const handleCloseModal = () => {
+  const handleCloseModalSuccess = () => {
     setIsOrderSuccessModalOpen(false);
   };
-
+  const handleCloseModalError = () => {
+    setIsOrderErrorModalOpen(false);
+  };
 
   const handleOrderSubmit = async () => {
     if (cartItems.length === 0) {
@@ -50,8 +52,7 @@ export default function CartPage(): JSX.Element {
       await dispatch(sendOrderAction(order)).unwrap();
       setIsOrderSuccessModalOpen(true);
     } catch (error) {
-      setOrderError(errorMessage);
-      setTimeout(() => setOrderError(null), 5000);
+      setIsOrderErrorModalOpen(true);
     }
   };
   if (isSendingOrder) {
@@ -133,13 +134,9 @@ export default function CartPage(): JSX.Element {
                   >Оформить заказ
                   </button>
                   {/* Модалка успеха */}
-                  {isOrderSuccessModalOpen && <ModalBasketSuccess onClose={handleCloseModal} />}
+                  {isOrderSuccessModalOpen && <ModalBasketSuccess onClose={handleCloseModalSuccess} />}
                   {/* Попап ошибки */}
-                  {orderError && (
-                    <div className="popup popup--error">
-                      <p>{orderError}</p>
-                    </div>
-                  )}
+                  {isOrderErrorModalOpen && <ModalBasketError onClose={handleCloseModalError} />}
                 </div>
               </div>
             </div>
