@@ -4,6 +4,7 @@ import CatalogPage from './catalog-page';
 import { configureStore } from '@reduxjs/toolkit';
 import { cardsMocks } from '../../testing-mocks';
 import { Provider } from 'react-redux';
+import { FeatureModule } from '../../const';
 
 const mockStore = configureStore({
   reducer: {
@@ -22,6 +23,9 @@ const mockStore = configureStore({
     sorting: () => ({
       type: 'price',
       order: 'asc',
+    }),
+    [FeatureModule.CART]: () => ({
+      items: [],
     }),
   },
 });

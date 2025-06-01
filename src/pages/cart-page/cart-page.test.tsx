@@ -1,32 +1,39 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import ProductCard from './product-card';
-import { cardMock } from '../../testing-mocks';
-import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
 import { FeatureModule } from '../../const';
+import CartPage from './cart-page';
+
 const mockStore = configureStore({
   reducer: {
+    [FeatureModule.CARDS]: () => ({
+      promo: [],
+    }),
     [FeatureModule.CART]: () => ({
-      items: []
+      items: [],
+      isSendingOrder: false,
+      totalPrice: 0,
+      totalCount: 0,
+      discountAmount: 0,
+      finalPrice: 0
     })
   }
 });
 
-describe('productCard Component', () => {
+describe('cartPage Component', () => {
   it('should render correct', () => {
-    const mockCard = cardMock;
 
     render(
       <Provider store={mockStore}>
         <BrowserRouter>
-          <ProductCard card={mockCard} />
+          <CartPage />
         </BrowserRouter>
       </Provider>
     );
 
-    const cardElement = screen.getByTestId('card');
-    expect(cardElement).toBeInTheDocument();
 
+    const cartPageElement = screen.getByTestId('cart');
+    expect(cartPageElement).toBeInTheDocument();
   });
 });

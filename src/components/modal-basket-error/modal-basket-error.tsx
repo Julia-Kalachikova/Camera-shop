@@ -55,7 +55,7 @@ export default function ModalBasketError({ onClose }: Props): JSX.Element {
   };
   return (
     <div
-      className="modal is-active modal--narrow"
+      className="modal is-active modal--narrow" data-testid='modal-basket-error'
       onClick={handleOverlayClick}
       ref={modalRef}
       tabIndex={-1}

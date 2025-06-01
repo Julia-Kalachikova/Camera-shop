@@ -9,9 +9,8 @@ describe('cardsSlice', () => {
     const emptyAction = { type: '' };
     const expectedState = {
       cards: [],
-      isLoadingCards: true,
-      isSendingRequest: false,
-      requestError: null,
+      promo: [],
+      isLoadingCards: true
     };
 
     const result = cardsSlice.reducer(undefined, emptyAction);
@@ -21,9 +20,8 @@ describe('cardsSlice', () => {
   it('should set isLoadingCards to true with "getCardsAction.pending"', () => {
     const expectedState = {
       cards: [],
+      promo: [],
       isLoadingCards: true,
-      isSendingRequest: false,
-      requestError: null,
     };
 
     const result = cardsSlice.reducer(undefined, getCardsAction.pending);
@@ -34,9 +32,8 @@ describe('cardsSlice', () => {
     const mockData: ProductCardType[] = [cardMock];
     const expectedState = {
       cards: mockData,
+      promo: [],
       isLoadingCards: false,
-      isSendingRequest: false,
-      requestError: null,
     };
 
     const result = cardsSlice.reducer(
@@ -49,9 +46,8 @@ describe('cardsSlice', () => {
   it('should set isLoadingCards to false with "getCardsAction.rejected"', () => {
     const expectedState = {
       cards: [],
+      promo: [],
       isLoadingCards: false,
-      isSendingRequest: false,
-      requestError: null,
     };
 
     const result = cardsSlice.reducer(undefined, getCardsAction.rejected);

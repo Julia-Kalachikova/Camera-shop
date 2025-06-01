@@ -33,6 +33,9 @@ const mockStore = configureStore({
       cards: [],
       isLoadingCards: false,
     }),
+    [FeatureModule.CART]: () => ({
+      items: [],
+    }),
   },
 });
 

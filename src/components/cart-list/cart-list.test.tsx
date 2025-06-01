@@ -1,10 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import ProductCard from './product-card';
-import { cardMock } from '../../testing-mocks';
-import { Provider } from 'react-redux';
+import CartList from './cart-list';
 import { configureStore } from '@reduxjs/toolkit';
 import { FeatureModule } from '../../const';
+import { Provider } from 'react-redux';
 const mockStore = configureStore({
   reducer: {
     [FeatureModule.CART]: () => ({
@@ -13,20 +12,18 @@ const mockStore = configureStore({
   }
 });
 
-describe('productCard Component', () => {
+describe('cartList Component', () => {
   it('should render correct', () => {
-    const mockCard = cardMock;
 
     render(
       <Provider store={mockStore}>
         <BrowserRouter>
-          <ProductCard card={mockCard} />
+          <CartList />
         </BrowserRouter>
       </Provider>
     );
 
-    const cardElement = screen.getByTestId('card');
-    expect(cardElement).toBeInTheDocument();
-
+    const cartListElement = screen.getByTestId('cart-list');
+    expect(cartListElement).toBeInTheDocument();
   });
 });

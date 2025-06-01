@@ -45,12 +45,6 @@ export type ReviewType = {
 };
 
 
-// export type CallRequestType = {
-//   camerasIds: [number];
-//   coupon: null;
-//   tel: string;
-// };
-
 export enum SortType {
   Price = 'price',
   Popular = 'popular'

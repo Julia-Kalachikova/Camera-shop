@@ -11,7 +11,7 @@ type Props = {
 
 export default function ModalDeleteItem({productCard, onClose, onHandleRemoveFromCart}: Props): JSX.Element {
   return (
-    <div className="modal is-active">
+    <div className="modal is-active" data-testid='modal-delete-item'>
       <div className="modal__wrapper">
         <div className="modal__overlay"></div>
         <div className="modal__content">

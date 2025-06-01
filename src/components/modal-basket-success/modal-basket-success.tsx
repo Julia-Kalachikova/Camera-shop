@@ -54,7 +54,7 @@ export default function ModalBasketSuccess({ onClose }: Props): JSX.Element {
   };
   return (
     <div
-      className="modal is-active modal--narrow"
+      className="modal is-active modal--narrow" data-testid='modal-basket-success'
       onClick={handleOverlayClick}
       ref={modalRef}
       tabIndex={-1}

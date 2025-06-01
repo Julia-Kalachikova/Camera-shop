@@ -85,7 +85,7 @@ export default function ModalAddItemSuccess({ onClose }: Props): JSX.Element {
 
   return (
     <div
-      className="modal is-active modal--narrow"
+      className="modal is-active modal--narrow" data-testid='add-item-success'
       onClick={handleOverlayClick}
       ref={modalRef}
       tabIndex={-1}

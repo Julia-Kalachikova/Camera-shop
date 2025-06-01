@@ -6,13 +6,19 @@ import { render, screen } from '@testing-library/react';
 import App from './app';
 import { FeatureModule, RoutePath } from '../../const';
 import { reviewsMock } from '../../testing-mocks';
+import { SortOrder, SortType } from '../../types';
 
 
 describe('App Component', () => {
   it('should render CatalogPage on root route', () => {
     const mockStore = configureStore({
       reducer: {
-        [FeatureModule.CARDS]: () => ({ cards: [], isLoadingCards: false }),
+        [FeatureModule.CARDS]: () => ({
+          cards: [],
+          promo: [],
+          isLoadingCards: false,
+
+        }),
         filters: () => ({
           price: {
             currentMin: '',
@@ -25,9 +31,12 @@ describe('App Component', () => {
           levels: [],
         }),
         sorting: () => ({
-          type: 'price',
-          order: 'asc',
+          type: SortType.Price,
+          order: SortOrder.Asc,
         }),
+        [FeatureModule.CART]: () => ({
+          items: [],
+        })
       },
     });
 
@@ -46,7 +55,7 @@ describe('App Component', () => {
   it('should render ProductPage on product route', () => {
     const mockStore = configureStore({
       reducer: {
-        [ FeatureModule.PRODUCT]: () => ({
+        [FeatureModule.PRODUCT]: () => ({
           productDetails: null,
           productLoadingDetails: false,
           productReviews: reviewsMock,
@@ -102,5 +111,33 @@ describe('App Component', () => {
 
     const spinner = screen.getByTestId('spinner');
     expect(spinner).toBeInTheDocument();
+  });
+
+  it('should render CartPage on root route', () => {
+    const mockStore = configureStore({
+      reducer: {
+        [FeatureModule.CART]: () => ({
+          items: [],
+          promo: [],
+          isSendingOrder: false
+        }),
+        [FeatureModule.CARDS]: () => ({
+          cards: [],
+          promo: [],
+          isLoadingCards: false
+        }),
+      },
+    });
+
+    render(
+      <Provider store={mockStore}>
+        <MemoryRouter initialEntries={[RoutePath.Cart]}>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const cartElement = screen.getByTestId('cart');
+    expect(cartElement).toBeInTheDocument();
   });
 });

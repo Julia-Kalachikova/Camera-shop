@@ -15,6 +15,9 @@ describe('Header Component', () => {
           cards: [],
           isLoadingCards: false
         }),
+        [FeatureModule.CART]: () => ({
+          items: [],
+        }),
       },
     });
 

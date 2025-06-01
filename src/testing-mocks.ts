@@ -1,3 +1,4 @@
+import { CartItem } from './store/slice/cart-slice';
 import { ProductCardType, ReviewType } from './types';
 
 export const cardsMocks: ProductCardType[] = [
@@ -50,6 +51,7 @@ export const cardMock: ProductCardType = {
   'previewImgWebp': 'img/content/das-auge.webp',
   'previewImgWebp2x': 'img/content/das-auge@2x.webp'
 };
+
 export const reviewsMock: ReviewType[] = [
   {
     'id': 'f1d10ddd-2a21-4f71-9e1e-5f511703fbdd',

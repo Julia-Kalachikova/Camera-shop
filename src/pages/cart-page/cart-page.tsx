@@ -62,7 +62,7 @@ export default function CartPage(): JSX.Element {
     <div className="wrapper">
       <Header />
       <main>
-        <div className="page-content">
+        <div className="page-content" data-testid='cart'>
           <div className="breadcrumbs">
             <div className="container">
               <ul className="breadcrumbs__list">

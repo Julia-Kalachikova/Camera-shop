@@ -95,7 +95,7 @@ export default function ModalAddItem({ productCard, onClose, onAddToCart }: Prop
 
   return (
     <div
-      className="modal is-active"
+      className="modal is-active" data-testid="add-item"
       onClick={handleOverlayClick}
       role='dialog'
       aria-modal='true'

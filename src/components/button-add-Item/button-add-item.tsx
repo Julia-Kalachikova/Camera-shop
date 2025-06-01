@@ -69,7 +69,7 @@ export default function ButtonAddItem({ productCard, variant }: Props): JSX.Elem
     );
   }
   return (
-    <div>
+    <div data-testid='button-add-item'>
       {button}
       {isModalOpen && (
         <ModalAddItem

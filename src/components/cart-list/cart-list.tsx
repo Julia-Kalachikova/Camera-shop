@@ -40,7 +40,7 @@ export default function CartList(): JSX.Element {
 
   return (
     <>
-      <ul className="basket__list">
+      <ul className="basket__list" data-testid='cart-list'>
         {cartItems.map((item) => (
           <li className="basket-item" key={item.id}>
             <div className="basket-item__img">
