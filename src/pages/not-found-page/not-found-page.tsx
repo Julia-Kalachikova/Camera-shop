@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+
 import { RoutePath } from '../../const';
 import './not-found-page-style.css';
 

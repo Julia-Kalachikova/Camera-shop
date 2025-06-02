@@ -1,5 +1,7 @@
-import { ProductCardType } from '../../types';
 import { KeyboardEvent, MouseEvent } from 'react';
+
+import { ProductCardType } from '../../types';
+
 
 type Props = {
   product: ProductCardType;

@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../const';
 
+
 type Props = {
   onClose: () => void;
 }
@@ -31,7 +32,6 @@ export default function ModalBasketError({ onClose }: Props): JSX.Element {
       }
     };
 
-    // ВАЖНО: слушаем keydown на document, а не на modalRef.current
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {

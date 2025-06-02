@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Header from './header';
 import { Provider } from 'react-redux';
-import { FeatureModule } from '../../const';
 import { configureStore } from '@reduxjs/toolkit';
+
+import Header from './header';
+import { FeatureModule } from '../../const';
 
 
 describe('Header Component', () => {

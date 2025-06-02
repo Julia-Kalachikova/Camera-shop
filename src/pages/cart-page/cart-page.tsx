@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import CartList from '../../components/cart-list/cart-list';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
-import { selectCartFinalPrice, selectCartItems, selectCartTotalCount, selectCartTotalPrice, selectDiscountAmount, selectIsSendingOrder, selectOrderError } from '../../store/selectors/selectors';
-import { useEffect, useState } from 'react';
+import { selectCartFinalPrice, selectCartItems, selectCartTotalCount, selectCartTotalPrice, selectDiscountAmount, selectIsSendingOrder } from '../../store/selectors/selectors';
 import { getCardsPromoAction, sendOrderAction } from '../../store/api-actions/api-actions';
-// import { errorMessage } from '../../const';
 import ModalBasketSuccess from '../../components/modal-basket-success/modal-basket-success';
 import Spinner from '../../components/spinner/spinner';
 import ModalBasketError from '../../components/modal-basket-error/modal-basket-error';
+
 
 export default function CartPage(): JSX.Element {
   const cartTotalPrice = useAppSelector(selectCartTotalPrice);
@@ -133,9 +134,7 @@ export default function CartPage(): JSX.Element {
                     }}
                   >Оформить заказ
                   </button>
-                  {/* Модалка успеха */}
                   {isOrderSuccessModalOpen && <ModalBasketSuccess onClose={handleCloseModalSuccess} />}
-                  {/* Попап ошибки */}
                   {isOrderErrorModalOpen && <ModalBasketError onClose={handleCloseModalError} />}
                 </div>
               </div>

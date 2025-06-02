@@ -1,4 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
+
 import { FeatureModule } from '../const';
 import { cardsSlice } from './slice/catalog-slice';
 import { productDetailsSlice } from './slice/product-details-slice';

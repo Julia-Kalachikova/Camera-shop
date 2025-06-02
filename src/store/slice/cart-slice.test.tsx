@@ -2,6 +2,7 @@ import { cartSlice, addToCart, removeFromCart, increaseCount, decreaseCount, set
 import { sendOrderAction } from '../api-actions/api-actions';
 import { cardMock } from '../../testing-mocks';
 
+
 describe('cartSlice', () => {
   const mockProduct = cardMock;
 

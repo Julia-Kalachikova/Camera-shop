@@ -3,6 +3,7 @@ import { setSortOrder, setSortType } from '../../store/slice/sorting-slice';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { SortOrder, SortType } from '../../types';
 
+
 export default function Sorting(): JSX.Element {
 
   const dispatch = useAppDispatch();

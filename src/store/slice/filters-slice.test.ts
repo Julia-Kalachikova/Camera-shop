@@ -1,4 +1,6 @@
+import { CAMERA_CATEGORY, CAMERA_LEVEL, CAMERA_TYPE } from '../../const';
 import { filtersSlice, resetFilters, setCategory, setLevel, setMaxPrice, setMinPrice, setPriceRange, setType } from './filters-slice';
+
 
 describe('filtersSlice', () => {
 
@@ -36,24 +38,24 @@ describe('filtersSlice', () => {
   });
 
   it('should set the category with setCategory', () => {
-    const action = setCategory('Фотоаппарат');
+    const action = setCategory(CAMERA_CATEGORY.PHOTO);
     const state = filtersSlice.reducer(undefined, action);
 
-    expect(state.category).toBe('Фотоаппарат');
+    expect(state.category).toBe(CAMERA_CATEGORY.PHOTO);
   });
 
   it('should set the camera type with setType', () => {
-    const action = setType({type: 'Коллекционная', value: true});
+    const action = setType({type: CAMERA_TYPE.COLLECTIBLE, value: true});
     const state = filtersSlice.reducer(undefined, action);
 
-    expect(state.types['Коллекционная']).toBe(true);
+    expect(state.types[CAMERA_TYPE.COLLECTIBLE]).toBe(true);
   });
 
   it('should set the camera level with setLevel', () => {
-    const action = setLevel({level: 'Любительский', value: true});
+    const action = setLevel({level: CAMERA_LEVEL.AMATEUR, value: true});
     const state = filtersSlice.reducer(undefined, action);
 
-    expect(state.levels['Любительский']).toBe(true);
+    expect(state.levels[CAMERA_LEVEL.AMATEUR]).toBe(true);
   });
 
   it('should reset filters with resetFilters', () => {
@@ -61,8 +63,8 @@ describe('filtersSlice', () => {
     const resetState = filtersSlice.reducer(filledState, resetFilters());
 
     expect(resetState.category).toBe('');
-    expect(resetState.types['Плёночная']).toBe(false);
-    expect(resetState.levels['Любительский']).toBe(false);
+    expect(resetState.types[CAMERA_TYPE.FILM]).toBe(false);
+    expect(resetState.levels[CAMERA_LEVEL.AMATEUR]).toBe(false);
     expect(resetState.price.defaultMin).toBe(1000);
     expect(resetState.price.defaultMax).toBe(5000);
   });

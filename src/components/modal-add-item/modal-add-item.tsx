@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { ProductCardType } from '../../types';
 
+
 type Props = {
   productCard: ProductCardType;
   onClose: () => void;
   onAddToCart: () => void;
 }
-
 
 export default function ModalAddItem({ productCard, onClose, onAddToCart }: Props): JSX.Element {
   const { category, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, price, type, name, vendorCode, level } = productCard;

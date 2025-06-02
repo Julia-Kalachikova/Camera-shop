@@ -1,4 +1,4 @@
-import { CartItem } from './store/slice/cart-slice';
+
 import { ProductCardType, ReviewType } from './types';
 
 export const cardsMocks: ProductCardType[] = [
@@ -23,7 +23,7 @@ export const cardsMocks: ProductCardType[] = [
     'name': 'Instaprinter P2',
     'vendorCode': 'KLU789GH56',
     'type': 'Цифровая',
-    'category': 'Фотоаппарат',
+    'category': 'Фотокамера',
     'description': 'Компактная модель позволяющая получать чёткие снимки с 25-кратным зумом. В комплекте зарядное устройство и бархатный чехол, а так же удобный шнурок на шею.',
     'previewImg': 'img/content/instaprinter.jpg',
     'level': 'Нулевой',

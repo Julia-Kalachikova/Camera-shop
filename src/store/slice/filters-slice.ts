@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CameraCategory, CameraLevel, CameraType, FeatureModule } from '../../const';
+import { CAMERA_CATEGORY, CAMERA_TYPE, CameraCategory, CameraLevel, CameraType, FeatureModule } from '../../const';
 
 export type FilterSliceType = {
   price: {
@@ -66,14 +66,14 @@ export const filtersSlice = createSlice({
     },
     setCategory(state, action: PayloadAction<CameraCategory | ''>) {
       state.category = action.payload;
-      if (action.payload === 'Видеокамера') {
-        state.types['Плёночная'] = false;
-        state.types['Моментальная'] = false;
+      if (action.payload === CAMERA_CATEGORY.VIDEO) {
+        state.types[CAMERA_TYPE.FILM] = false;
+        state.types[CAMERA_TYPE.INSTANT] = false;
       }
     },
     setType(state, action: PayloadAction<{type: CameraType; value: boolean}>) {
       const {type, value} = action.payload;
-      if (state.category === 'Видеокамера' && (type === 'Плёночная' || type === 'Моментальная')) {
+      if (state.category === CAMERA_CATEGORY.VIDEO && (type === CAMERA_TYPE.FILM || type === CAMERA_TYPE.INSTANT)) {
         return;
       }
       state.types[type] = value;

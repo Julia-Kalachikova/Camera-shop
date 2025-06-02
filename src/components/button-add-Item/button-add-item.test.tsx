@@ -2,10 +2,12 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
+
 import { cardsSlice } from '../../store/slice/catalog-slice';
 import ButtonAddItem from './button-add-item';
 import { cardMock } from '../../testing-mocks';
 import { cartSlice } from '../../store/slice/cart-slice';
+
 
 describe('buttonAddItem Component', () => {
   const mockStore = configureStore({

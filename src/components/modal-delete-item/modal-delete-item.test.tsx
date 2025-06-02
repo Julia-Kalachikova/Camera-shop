@@ -2,9 +2,11 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
+
 import { cardsSlice } from '../../store/slice/catalog-slice';
 import ModalDeleteItem from './modal-delete-item';
 import { cardMock } from '../../testing-mocks';
+
 
 describe('modalDeleteItem Component', () => {
   const mockStore = configureStore({

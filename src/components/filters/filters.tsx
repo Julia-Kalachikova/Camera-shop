@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+
 import { selectCards } from '../../store/selectors/selectors';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { StateType } from '../../store/store-types';
 import { resetFilters, setCategory, setLevel, setMaxPrice, setMinPrice, setPriceRange, setType } from '../../store/slice/filters-slice';
 import FilterCheckboxItem from '../filter-checkbox-item/filter-checkbox-item';
+import { CAMERA_CATEGORY, CAMERA_LEVEL, CAMERA_TYPE } from '../../const';
+
 
 export default function Filters(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -110,9 +113,9 @@ export default function Filters(): JSX.Element {
               <input
                 type="radio"
                 name="category"
-                value="Фотоаппарат"
-                checked={filters.category === 'Фотоаппарат'}
-                onChange={() => dispatch(setCategory('Фотоаппарат'))}
+                value="Фотокамера"
+                checked={filters.category === CAMERA_CATEGORY.PHOTO}
+                onChange={() => dispatch(setCategory(CAMERA_CATEGORY.PHOTO))}
               />
               <span className="custom-radio__icon"></span><span className="custom-radio__label">Фотокамера</span>
             </label>
@@ -123,8 +126,8 @@ export default function Filters(): JSX.Element {
                 type="radio"
                 name="category"
                 value='Видеокамера'
-                checked={filters.category === 'Видеокамера'}
-                onChange={() => dispatch(setCategory('Видеокамера'))}
+                checked={filters.category === CAMERA_CATEGORY.VIDEO}
+                onChange={() => dispatch(setCategory(CAMERA_CATEGORY.VIDEO))}
               />
               <span className="custom-radio__icon"></span>
               <span className="custom-radio__label">Видеокамера</span>
@@ -135,29 +138,29 @@ export default function Filters(): JSX.Element {
           <legend className="title title&#45;&#45;h5">Тип камеры</legend>
           <FilterCheckboxItem
             type='Цифровая'
-            checked={filters.types['Цифровая']}
-            onChange={(value) => dispatch(setType({ type: 'Цифровая', value }))}
+            checked={filters.types[CAMERA_TYPE.DIGITAL]}
+            onChange={(value) => dispatch(setType({ type: CAMERA_TYPE.DIGITAL, value }))}
             disabled={false}
             label='Цифровая'
           />
           <FilterCheckboxItem
             type='Плёночная'
-            checked={filters.types['Плёночная']}
-            onChange={(value) => dispatch(setType({ type: 'Плёночная', value }))}
-            disabled={filters.category === 'Видеокамера'}
+            checked={filters.types[CAMERA_TYPE.FILM]}
+            onChange={(value) => dispatch(setType({ type: CAMERA_TYPE.FILM, value }))}
+            disabled={filters.category === CAMERA_CATEGORY.VIDEO}
             label='Плёночная'
           />
           <FilterCheckboxItem
             type='Моментальная'
-            checked={filters.types['Моментальная']}
-            onChange={(value) => dispatch(setType({ type: 'Моментальная', value }))}
-            disabled={filters.category === 'Видеокамера'}
+            checked={filters.types[CAMERA_TYPE.INSTANT]}
+            onChange={(value) => dispatch(setType({ type: CAMERA_TYPE.INSTANT, value }))}
+            disabled={filters.category === CAMERA_CATEGORY.VIDEO}
             label='Моментальная'
           />
           <FilterCheckboxItem
             type='Коллекционная'
-            checked={filters.types['Коллекционная']}
-            onChange={(value) => dispatch(setType({ type: 'Коллекционная', value }))}
+            checked={filters.types[CAMERA_TYPE.COLLECTIBLE]}
+            onChange={(value) => dispatch(setType({ type: CAMERA_TYPE.COLLECTIBLE, value }))}
             disabled={false}
             label='Коллекционная'
           />
@@ -166,20 +169,20 @@ export default function Filters(): JSX.Element {
           <legend className="title title&#45;&#45;h5">Уровень</legend>
           <FilterCheckboxItem
             type='Нулевой'
-            checked={filters.levels['Нулевой']}
-            onChange={(value) => dispatch(setLevel({ level: 'Нулевой', value }))}
+            checked={filters.levels[CAMERA_LEVEL.ZERO]}
+            onChange={(value) => dispatch(setLevel({ level: CAMERA_LEVEL.ZERO, value }))}
             label='Нулевой'
           />
           <FilterCheckboxItem
             type='Любительский'
-            checked={filters.levels['Любительский']}
-            onChange={(value) => dispatch(setLevel({ level: 'Любительский', value }))}
+            checked={filters.levels[CAMERA_LEVEL.AMATEUR]}
+            onChange={(value) => dispatch(setLevel({ level: CAMERA_LEVEL.AMATEUR, value }))}
             label='Любительский'
           />
           <FilterCheckboxItem
             type='Профессиональный'
-            checked={filters.levels['Профессиональный']}
-            onChange={(value) => dispatch(setLevel({ level: 'Профессиональный', value }))}
+            checked={filters.levels[CAMERA_LEVEL.PRO]}
+            onChange={(value) => dispatch(setLevel({ level: CAMERA_LEVEL.PRO, value }))}
             label='Профессиональный'
           />
         </fieldset>

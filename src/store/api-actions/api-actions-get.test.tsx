@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+
 import { APIRoutes, FeatureModule } from '../../const';
 import { getCardsAction, getProductDetailsByID, getProductReviews } from './api-actions';
 import { cardsSlice } from '../slice/catalog-slice';
@@ -9,6 +10,7 @@ import { productDetailsSlice } from '../slice/product-details-slice';
 import { ProductCardType, ReviewType } from '../../types';
 import { filtersSlice } from '../slice/filters-slice';
 import { sortingSlice } from '../slice/sorting-slice';
+import { cartSlice } from '../slice/cart-slice';
 
 
 const mockAxios = new MockAdapter(axios);
@@ -19,6 +21,7 @@ function createTestStore() {
       [FeatureModule.PRODUCT]: productDetailsSlice.reducer,
       [FeatureModule.FILTERS]: filtersSlice.reducer,
       [FeatureModule.SORTING]: sortingSlice.reducer,
+      [FeatureModule.CART]: cartSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

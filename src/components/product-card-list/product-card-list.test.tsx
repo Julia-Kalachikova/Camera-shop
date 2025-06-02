@@ -1,10 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+
 import ProductCardList from './product-card-list';
 import { cardsMocks } from '../../testing-mocks';
-import { Provider } from 'react-redux';
 import { FeatureModule } from '../../const';
-import { configureStore } from '@reduxjs/toolkit';
+
 
 const mockStore = configureStore({
   reducer: {

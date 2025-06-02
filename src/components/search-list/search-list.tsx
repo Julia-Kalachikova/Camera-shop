@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 
 import SearchItem from '../search-item/search-item';
 import { ProductCardType } from '../../types';
-import { useEffect } from 'react';
+
 
 type Props = {
   results: ProductCardType[];

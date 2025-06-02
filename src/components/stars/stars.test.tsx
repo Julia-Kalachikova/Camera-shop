@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+
 import Stars from './stars';
 import { cardMock } from '../../testing-mocks';
 

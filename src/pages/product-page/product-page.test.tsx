@@ -1,10 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
-import { cardMock, reviewsMock } from '../../testing-mocks';
 import { Provider } from 'react-redux';
+
+import { cardMock, reviewsMock } from '../../testing-mocks';
 import ProductPage from './product-page';
 import { FeatureModule } from '../../const';
+
 
 const mockStore = configureStore({
   reducer: {

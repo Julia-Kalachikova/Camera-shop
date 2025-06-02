@@ -1,10 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import ProductCard from './product-card';
-import { cardMock } from '../../testing-mocks';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+
+import ProductCard from './product-card';
+import { cardMock } from '../../testing-mocks';
 import { FeatureModule } from '../../const';
+
+
 const mockStore = configureStore({
   reducer: {
     [FeatureModule.CART]: () => ({

@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import Filters from './filters';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+
+import Filters from './filters';
 import { cardsMocks } from '../../testing-mocks';
+
 
 describe('Filters Component', () => {
   it('should render correctly', () => {

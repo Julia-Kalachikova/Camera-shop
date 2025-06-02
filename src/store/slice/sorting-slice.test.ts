@@ -1,6 +1,7 @@
 import { SortOrder, SortType } from '../../types';
 import { setSortOrder, setSortType, sortingSlice } from './sorting-slice';
 
+
 describe('sortingSlice', () => {
   it('should handle setSortOrder', () => {
     expect(sortingSlice.reducer(undefined, { type: undefined })).toEqual({

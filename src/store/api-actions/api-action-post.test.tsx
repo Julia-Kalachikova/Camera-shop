@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+
 import { APIRoutes, FeatureModule } from '../../const';
 import { sendOrderAction } from './api-actions';
 import { cardsSlice } from '../slice/catalog-slice';

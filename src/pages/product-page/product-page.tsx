@@ -1,8 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
-import { useEffect, useState } from 'react';
 import { getProductDetailsByID, getProductReviews } from '../../store/api-actions/api-actions';
 import { selectProductDetails, selectProductLoadingDetails, selectProductReviews } from '../../store/selectors/selectors';
 import { RoutePath } from '../../const';
@@ -12,6 +13,7 @@ import Description from '../../components/bloc-info/description';
 import Spinner from '../../components/spinner/spinner';
 import ReviewList from '../../components/reviews-list/reviews-list';
 import ButtonAddItem from '../../components/button-add-Item/button-add-item';
+
 
 export default function ProductPage(): JSX.Element {
   const [activeTab, setActiveTab] = useState<'specs' | 'description'>('description');

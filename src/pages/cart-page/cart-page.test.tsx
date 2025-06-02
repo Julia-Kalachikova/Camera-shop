@@ -2,8 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+
 import { FeatureModule } from '../../const';
 import CartPage from './cart-page';
+
 
 const mockStore = configureStore({
   reducer: {

@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import Sorting from './sorting';
 import { configureStore } from '@reduxjs/toolkit';
+
+import Sorting from './sorting';
 import { cardsMocks } from '../../testing-mocks';
 import { SortOrder, SortType } from '../../types';
+
 
 describe('Sorting Component', () => {
   it('should render correctly', () => {

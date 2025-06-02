@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
+import { createRef } from 'react';
+
 import SearchList from './search-list';
 import { cardsMocks } from '../../testing-mocks';
-import { createRef } from 'react';
+
 
 describe('SearchList', () => {
   beforeAll(() => {

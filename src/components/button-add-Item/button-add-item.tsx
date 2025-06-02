@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import ModalAddItem from '../modal-add-item/modal-add-item';
 import ModalAddItemSuccess from '../modal-add-item-success/modal-add-item-success';
 import { ProductCardType } from '../../types';
@@ -6,7 +8,6 @@ import { RoutePath, VariantButtonAddItem } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { addToCart } from '../../store/slice/cart-slice';
 import { isProductInCart } from '../../store/selectors/selectors';
-import { Link } from 'react-router-dom';
 
 
 type Props = {

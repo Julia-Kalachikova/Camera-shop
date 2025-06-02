@@ -3,6 +3,7 @@ import { getProductDetailsByID, getProductReviews } from '../api-actions/api-act
 import { cardMock, reviewsMock } from '../../testing-mocks';
 import { productDetailsSlice } from './product-details-slice';
 
+
 describe('productDetailsSlice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };

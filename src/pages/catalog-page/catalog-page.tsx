@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import ProductCardList from '../../components/product-card-list/product-card-list';
@@ -6,18 +7,11 @@ import { useAppSelector } from '../../store/store-hooks';
 import { selectProcessedCards } from '../../store/selectors/selectors';
 import Filters from '../../components/filters/filters';
 import Sorting from '../../components/sorting/sorting';
-// import { getCardsPromoAction } from '../../store/api-actions/api-actions';
-// import { useEffect } from 'react';
 
 
 export default function CatalogPage(): JSX.Element {
 
   const productCards = useAppSelector(selectProcessedCards);
-  // const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getCardsPromoAction());
-  // }, [dispatch]);
 
   return (
     <div className="wrapper" data-testid='catalog'>

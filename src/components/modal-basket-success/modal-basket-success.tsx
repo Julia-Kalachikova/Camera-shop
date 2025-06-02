@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../const';
 
+
 type Props = {
   onClose: () => void;
 }
@@ -29,17 +30,15 @@ export default function ModalBasketSuccess({ onClose }: Props): JSX.Element {
     const handleKeyDown = (evt: KeyboardEvent) => {
       if (evt.key === 'Escape') {
         onClose();
-        navigate(RoutePath.Catalog);
       }
     };
 
-    // ВАЖНО: слушаем keydown на document, а не на modalRef.current
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose, navigate]);
+  }, [onClose]);
 
   const handleOverlayClick = (evt: React.MouseEvent<HTMLDivElement>) => {
     if (evt.target === evt.currentTarget) {
@@ -47,11 +46,15 @@ export default function ModalBasketSuccess({ onClose }: Props): JSX.Element {
     }
   };
 
-  // Закрытие с редиректом
-  const handleClose = () => {
+  const handleCloseRedirect = () => {
     onClose();
     navigate(RoutePath.Catalog);
   };
+
+  const handleClose = () => {
+    onClose();
+  };
+
   return (
     <div
       className="modal is-active modal--narrow" data-testid='modal-basket-success'
@@ -69,7 +72,7 @@ export default function ModalBasketSuccess({ onClose }: Props): JSX.Element {
           <div className="modal__buttons">
             <button
               className="btn btn--purple modal__btn modal__btn--fit-width"
-              onClick={handleClose}
+              onClick={handleCloseRedirect}
               type="button"
             >Вернуться к покупкам
             </button>

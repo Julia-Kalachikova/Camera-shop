@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+
 import { ProductCardType } from '../../types';
 import { RoutePath } from '../../const';
+
 
 type Props = {
   productCard: ProductCardType;

@@ -1,16 +1,17 @@
 import { useCallback, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { RoutePath } from '../../const';
-import { Link } from 'react-router-dom';
+
 
 type Props = {
   onClose: () => void;
 }
 
-
 export default function ModalAddItemSuccess({ onClose }: Props): JSX.Element {
 
   const firstBtnRef = useRef<HTMLButtonElement>(null);
-
+  const navigate = useNavigate();
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -68,7 +69,6 @@ export default function ModalAddItemSuccess({ onClose }: Props): JSX.Element {
       }
     };
 
-    // ВАЖНО: слушаем keydown на document, а не на modalRef.current
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
@@ -81,7 +81,10 @@ export default function ModalAddItemSuccess({ onClose }: Props): JSX.Element {
       onClose();
     }
   };
-
+  const handleCloseRedirect = () => {
+    onClose();
+    navigate(RoutePath.Cart);
+  };
 
   return (
     <div
@@ -104,11 +107,11 @@ export default function ModalAddItemSuccess({ onClose }: Props): JSX.Element {
               onClick={onClose}
             >Продолжить покупки
             </Link>
-            <Link
+            <button
               className="btn btn--purple modal__btn modal__btn--fit-width"
-              to={RoutePath.Cart}
+              onClick={handleCloseRedirect}
             >Перейти в корзину
-            </Link>
+            </button>
           </div>
           <button
             className="cross-btn"

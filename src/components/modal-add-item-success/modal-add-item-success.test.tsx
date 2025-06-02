@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import ModalAddItemSuccess from './modal-add-item-success';
 import { configureStore } from '@reduxjs/toolkit';
+
+import ModalAddItemSuccess from './modal-add-item-success';
 import { cardsSlice } from '../../store/slice/catalog-slice';
+
 
 describe('modalAddItemSuccess Component', () => {
   const mockStore = configureStore({

@@ -17,8 +17,6 @@ export const selectProductReviews = (state: StateType) => state[FeatureModule.PR
 
 export const selectProductLoadingReviews = (state: StateType) => state[FeatureModule.PRODUCT].productLoadingReviews;
 
-export const selectCallRequestError = (state: StateType) => state[FeatureModule.CARDS].requestError;
-
 export const selectSorting = (state: StateType) => state.sorting;
 
 export const selectFilteredCards = (state: StateType): ProductCardType[] => {

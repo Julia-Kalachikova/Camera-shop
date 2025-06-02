@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { selectCartItems } from '../../store/selectors/selectors';
 import { decreaseCount, increaseCount, removeFromCart, setCount } from '../../store/slice/cart-slice';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
@@ -54,7 +55,7 @@ export default function CartList(): JSX.Element {
                   srcSet={item.previewImg2x}
                   width={140}
                   height={120}
-                  alt="{Фотоаппарат} «Орлёнок»"
+                  alt="{Фотокамера} «Орлёнок»"
                 />
               </picture>
             </div>

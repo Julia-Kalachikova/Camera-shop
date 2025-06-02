@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { ProductCardType } from '../../types';
 import { FeatureModule } from '../../const';
 import { sendOrderAction } from '../api-actions/api-actions';
+
 
 function loadCartFromLocalStorage(): CartSliceType | undefined {
   try {

@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import FilterCheckboxItem from './filter-checkbox-item';
 import { vi } from 'vitest';
+
+import FilterCheckboxItem from './filter-checkbox-item';
+
 
 describe('FilterCheckboxItem Component', () => {
   it('should render correctly', () => {

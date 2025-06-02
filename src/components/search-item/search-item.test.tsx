@@ -1,7 +1,9 @@
 import { vi } from 'vitest';
-import SearchItem from './search-item';
 import { render, screen } from '@testing-library/react';
+
+import SearchItem from './search-item';
 import { cardMock } from '../../testing-mocks';
+
 
 describe('SearchItem Component', () => {
   it('should render correctly', () => {
